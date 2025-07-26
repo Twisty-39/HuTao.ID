@@ -1,37 +1,44 @@
 /* Trailer Modal (copy dari index.css) */
 .trailer-modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(0,0,0,0.6);
-    display: none;
-    z-index: 1000;
-    justify-content: center;
-    align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+  display: none;
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+  margin: auto auto;
 }
+
 .trailer-modal .close {
-    cursor: pointer;
-    right: 18px;
-    top: 18px;
-    position: absolute;
-    font-size: 32px;
-    font-weight: bold;
-    color: #A94438;
-    text-shadow: 0px 0px 5px white;
+  cursor: pointer;
+  right: 18px;
+  top: 18px;
+  position: absolute;
+  font-size: 32px;
+  font-weight: bold;
+  color: #A94438;
+  text-shadow: 0px 0px 5px white;
+  /* margin: auto auto; */
+  /* z-index: 1000; */
 }
+
 .trailer-modal iframe {
-    width: 90vw;
-    max-width: 720px;
-    height: 400px;
-    border-radius: 8px;
-    border: none;
-    background: #E4DEBE;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.7);
-    display: block;
-    margin: 0 auto;
+  width: 70vw;
+  height: 70vh;
+  border-radius: 0;
+  border: none;
+  background: #E4DEBE;
+  box-shadow: none;
+  display: block;
+  justify-content: center;
+  align-items: center;
+  margin: 8% auto;
 }
+
 .detail-container {
   display: flex;
   flex-direction: column;
@@ -128,7 +135,7 @@
 .trailer-container {
   width: 100%;
   max-width: 600px;
-  margin: auto;
+  margin: auto auto;
 }
 
 .trailer-container iframe {

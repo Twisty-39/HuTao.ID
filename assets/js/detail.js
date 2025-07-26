@@ -78,7 +78,7 @@ function renderDetailAnime(anime) {
 
   const infoTable = document.createElement('table');
   infoTable.className = 'detail-info-table';
-  [
+  const infoRows = [
     { label: 'Type', value: anime.type },
     { label: 'Episodes', value: anime.episodes },
     { label: 'Duration', value: anime.duration },
@@ -86,7 +86,16 @@ function renderDetailAnime(anime) {
     { label: 'Score', value: anime.score },
     { label: 'Season & Year', value: `${anime.season || '-'} ${anime.year || '-'}` },
     { label: 'Rating', value: anime.rating },
-  ].forEach(item => {
+  ];
+  // Gabungkan genre/theme/demographic ke infoRows
+  if (anime.genres?.length || anime.themes?.length || anime.demographics?.length) {
+    const tags = [];
+    if (anime.genres) tags.push(...anime.genres.map(g => g.name));
+    if (anime.themes) tags.push(...anime.themes.map(t => t.name));
+    if (anime.demographics) tags.push(...anime.demographics.map(d => d.name));
+    infoRows.push({ label: 'Genre/Theme/Demographic', value: tags.length ? tags.join(', ') : '-' });
+  }
+  infoRows.forEach(item => {
     const tr = document.createElement('tr');
     tr.className = 'detail-info-row';
     const tdLabel = document.createElement('td');
@@ -100,28 +109,6 @@ function renderDetailAnime(anime) {
     infoTable.appendChild(tr);
   });
   right.appendChild(infoTable);
-
-  if (anime.genres?.length || anime.themes?.length || anime.demographics?.length) {
-    const tags = [];
-    if (anime.genres) tags.push(...anime.genres.map(g => g.name));
-    if (anime.themes) tags.push(...anime.themes.map(t => t.name));
-    if (anime.demographics) tags.push(...anime.demographics.map(d => d.name));
-
-    const li = document.createElement('li');
-    li.className = 'detail-tags-item';
-    const labelSpan = document.createElement('span');
-    labelSpan.className = 'detail-tags-label';
-    labelSpan.textContent = 'Genre/Theme/Demographic:';
-    const valueSpan = document.createElement('span');
-    valueSpan.className = 'detail-tags-value';
-    valueSpan.textContent = tags.length ? tags.join(', ') : '-';
-    li.appendChild(labelSpan);
-    li.appendChild(valueSpan);
-    const tagList = document.createElement('ul');
-    tagList.className = 'detail-tags';
-    tagList.appendChild(li);
-    right.appendChild(tagList);
-  }
 
   const desc = document.createElement('p');
   desc.className = 'detail-desc';
@@ -182,6 +169,7 @@ function renderDetailAnime(anime) {
     trailerBtn.textContent = 'Lihat Trailer';
     trailerBtn.onclick = function(e) {
       e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
       showTrailerModal(anime.trailer.embed_url);
     };
     left.appendChild(trailerBtn);
@@ -250,7 +238,7 @@ function renderDetailManga(manga) {
     title.textContent = manga.title;
     right.appendChild(title);
 
-    // Informasi detail sebagai tabel
+    // Informasi detail sebagai tabel, tags digabung
     const infoTable = document.createElement('table');
     infoTable.className = 'detail-info-table';
     const items = [
@@ -261,6 +249,14 @@ function renderDetailManga(manga) {
         { label: 'Score', value: manga.score || '-' },
         { label: 'Year', value: manga.published?.prop?.from?.year || '-' }
     ];
+    // Gabungkan tags
+    if (manga.genres?.length || manga.themes?.length || manga.demographics?.length) {
+        const tags = [];
+        if (manga.genres) tags.push(...manga.genres.map(g => g.name));
+        if (manga.themes) tags.push(...manga.themes.map(t => t.name));
+        if (manga.demographics) tags.push(...manga.demographics.map(d => d.name));
+        items.push({ label: 'Tags', value: tags.length ? tags.join(', ') : '-' });
+    }
     items.forEach(item => {
         const tr = document.createElement('tr');
         tr.className = 'detail-info-row';
@@ -275,33 +271,6 @@ function renderDetailManga(manga) {
         infoTable.appendChild(tr);
     });
     right.appendChild(infoTable);
-
-    // Genre + Theme + Demographic
-    if (manga.genres?.length || manga.themes?.length || manga.demographics?.length) {
-        const tagWrapper = document.createElement('ul');
-        tagWrapper.className = 'detail-tags';
-
-        const tags = [];
-        if (manga.genres) tags.push(...manga.genres.map(g => g.name));
-        if (manga.themes) tags.push(...manga.themes.map(t => t.name));
-        if (manga.demographics) tags.push(...manga.demographics.map(d => d.name));
-
-        const li = document.createElement('li');
-        li.className = 'detail-tags-item';
-
-        const labelSpan = document.createElement('span');
-        labelSpan.className = 'detail-tags-label';
-        labelSpan.textContent = 'Tags:';
-
-        const valueSpan = document.createElement('span');
-        valueSpan.className = 'detail-tags-value';
-        valueSpan.textContent = tags.length ? tags.join(', ') : '-';
-
-        li.appendChild(labelSpan);
-        li.appendChild(valueSpan);
-        tagWrapper.appendChild(li);
-        right.appendChild(tagWrapper);
-    }
 
     // Sinopsis
     const synopsis = document.createElement('p');

@@ -1,0 +1,24 @@
+.more {
+    color: #a83232;
+    font-size: 0.97rem;
+    text-decoration: underline;
+    margin-left: 0.3em;
+    cursor: pointer;
+}
+
+.more:hover {
+    color: #d94c4c;
+}
+
+.judul-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+}
+
+.judul-section h2 {
+    margin: 0;
+    font-size: 1.3rem;
+    font-weight: 700;
+}

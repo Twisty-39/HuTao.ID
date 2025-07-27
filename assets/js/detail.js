@@ -1,4 +1,4 @@
-//get data anime/manga
+//fecth data anime/manga
 document.addEventListener('DOMContentLoaded', function () {
   const params = new URLSearchParams(window.location.search);
   const id = params.get('id');
@@ -39,7 +39,25 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 });
 
-// tampilkan anime detail   
+// Helper untuk buat tabel
+function createTable(rows, rowClass, labelClass, valueClass) {
+  const table = document.createElement('table');
+  rows.forEach(item => {
+    const tr = document.createElement('tr');
+    if (rowClass) tr.className = rowClass;
+    const tdLabel = document.createElement('td');
+    if (labelClass) tdLabel.className = labelClass;
+    tdLabel.textContent = item.label;
+    const tdValue = document.createElement('td');
+    if (valueClass) tdValue.className = valueClass;
+    tdValue.textContent = item.value || '-';
+    tr.appendChild(tdLabel);
+    tr.appendChild(tdValue);
+    table.appendChild(tr);
+  });
+  return table;
+}
+
 function renderDetailAnime(anime) {
   const container = document.getElementById('detail');
   container.innerHTML = '';
@@ -47,19 +65,63 @@ function renderDetailAnime(anime) {
   const card = document.createElement('div');
   card.className = 'detail-card';
 
+  // Kiri
   const left = document.createElement('div');
   left.className = 'detail-left';
-
   const img = document.createElement('img');
   img.src = anime.images?.jpg?.image_url || '';
   img.alt = anime.title;
   img.className = 'detail-img';
   left.appendChild(img);
+
+  // Trailer
+  if (anime.trailer?.embed_url) {
+    const trailerBtn = document.createElement('button');
+    trailerBtn.className = 'trailer-btn';
+    trailerBtn.textContent = 'Lihat Trailer';
+    trailerBtn.onclick = function (e) {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      showTrailerModal(anime.trailer.embed_url);
+    };
+    left.appendChild(trailerBtn);
+  }
+
+  // Prod table
+  const prodRows = [
+    { label: 'Studios', value: anime.studios?.map(s => s.name).join(', ') },
+    { label: 'Producers', value: anime.producers?.map(p => p.name).join(', ') },
+    { label: 'Licensors', value: anime.licensors?.map(l => l.name).join(', ') }
+  ];
+  left.appendChild(createTable(prodRows, 'detail-prod-row', 'detail-prod-label', 'detail-prod-value'));
+
+  // Streaming
+  if (anime.streaming?.length) {
+    const streamTable = document.createElement('table');
+    const tr = document.createElement('tr');
+    const tdLabel = document.createElement('td');
+    tdLabel.textContent = 'Streaming';
+    tdLabel.className = 'detail-stream-label';
+    const tdValue = document.createElement('td');
+    tdValue.className = 'detail-stream-value';
+    anime.streaming.forEach(s => {
+      const a = document.createElement('a');
+      a.href = s.url;
+      a.textContent = s.name;
+      a.target = '_blank';
+      a.className = 'detail-stream-link';
+      tdValue.appendChild(a);
+    });
+    tr.appendChild(tdLabel);
+    tr.appendChild(tdValue);
+    streamTable.appendChild(tr);
+    left.appendChild(streamTable);
+  }
   card.appendChild(left);
 
+  // Kanan
   const right = document.createElement('div');
   right.className = 'detail-right';
-
   const title = document.createElement('h2');
   title.textContent = anime.title;
   right.appendChild(title);
@@ -78,71 +140,7 @@ function renderDetailAnime(anime) {
     right.appendChild(titleList);
   }
 
-  // Trailer: tombol pop up modal
-  if (anime.trailer?.embed_url) {
-    const trailerBtn = document.createElement('button');
-    trailerBtn.className = 'trailer-btn';
-    trailerBtn.textContent = 'Lihat Trailer';
-    trailerBtn.onclick = function (e) {
-      e.preventDefault();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-      showTrailerModal(anime.trailer.embed_url);
-    };
-    left.appendChild(trailerBtn);
-  }
-
-  const prodTable = document.createElement('table');
-  prodTable.className = 'detail-prod-table';
-  [
-    { label: 'Studios', value: anime.studios?.map(s => s.name).join(', ') },
-    { label: 'Producers', value: anime.producers?.map(p => p.name).join(', ') },
-    { label: 'Licensors', value: anime.licensors?.map(l => l.name).join(', ') }
-  ].forEach(item => {
-    const tr = document.createElement('tr');
-    tr.className = 'detail-prod-row';
-
-    const tdLabel = document.createElement('td');
-    tdLabel.className = 'detail-prod-label';
-    tdLabel.textContent = item.label;
-
-    const tdValue = document.createElement('td');
-    tdValue.className = 'detail-prod-value';
-    tdValue.textContent = item.value || '-';
-    tr.appendChild(tdLabel);
-    tr.appendChild(tdValue);
-    prodTable.appendChild(tr);
-  });
-  left.appendChild(prodTable);
-
-  if (anime.streaming?.length) {
-    const streamTable = document.createElement('table');
-    streamTable.className = 'detail-stream-table';
-
-    const tr = document.createElement('tr');
-    tr.className = 'detail-stream-row';
-
-    const tdLabel = document.createElement('td');
-    tdLabel.className = 'detail-stream-label';
-    tdLabel.textContent = 'Streaming';
-
-    const tdValue = document.createElement('td');
-    tdValue.className = 'detail-stream-value';
-    anime.streaming.forEach(s => {
-      const a = document.createElement('a');
-      a.href = s.url;
-      a.textContent = s.name;
-      a.target = '_blank';
-      a.className = 'detail-stream-link';
-      tdValue.appendChild(a);
-    });
-    tr.appendChild(tdLabel);
-    tr.appendChild(tdValue);
-    streamTable.appendChild(tr);
-    left.appendChild(streamTable);
-  }
-
-  const infoTable = document.createElement('table');
-  infoTable.className = 'detail-info-table';
+  // Info table
   const infoRows = [
     { label: 'Type', value: anime.type },
     { label: 'Episodes', value: anime.episodes },
@@ -152,7 +150,6 @@ function renderDetailAnime(anime) {
     { label: 'Season & Year', value: `${anime.season || '-'} ${anime.year || '-'}` },
     { label: 'Rating', value: anime.rating },
   ];
-  // Gabungkan genre/theme/demographic ke infoRows
   if (anime.genres?.length || anime.themes?.length || anime.demographics?.length) {
     const tags = [];
     if (anime.genres) tags.push(...anime.genres.map(g => g.name));
@@ -160,22 +157,7 @@ function renderDetailAnime(anime) {
     if (anime.demographics) tags.push(...anime.demographics.map(d => d.name));
     infoRows.push({ label: 'Genre', value: tags.length ? tags.join(', ') : '-' });
   }
-  infoRows.forEach(item => {
-    const tr = document.createElement('tr');
-    tr.className = 'detail-info-row';
-
-    const tdLabel = document.createElement('td');
-    tdLabel.className = 'detail-info-label';
-    tdLabel.textContent = item.label;
-
-    const tdValue = document.createElement('td');
-    tdValue.className = 'detail-info-value';
-    tdValue.textContent = item.value || '-';
-    tr.appendChild(tdLabel);
-    tr.appendChild(tdValue);
-    infoTable.appendChild(tr);
-  });
-  right.appendChild(infoTable);
+  right.appendChild(createTable(infoRows, 'detail-info-row', 'detail-info-label', 'detail-info-value'));
 
   const desc = document.createElement('p');
   desc.className = 'detail-desc';
@@ -186,70 +168,67 @@ function renderDetailAnime(anime) {
   container.appendChild(card);
 }
 
-// Modal trailer logic
+// Modal trailer logic tanpa innerHTML
 function showTrailerModal(embedUrl) {
   let modal = document.getElementById('trailer-modal');
   if (!modal) {
     modal = document.createElement('div');
     modal.id = 'trailer-modal';
     modal.className = 'trailer-modal';
-    modal.innerHTML = `
-      <div class="trailer-modal-content">
-        <span class="close">&times;</span>
-        <iframe src="" frameborder="0" allowfullscreen style="width:100%;height:340px;border-radius:8px;"></iframe>
-      </div>
-    `;
+    const closeBtn = document.createElement('span');
+    closeBtn.className = 'close';
+    closeBtn.textContent = '✖';
+    const iframe = document.createElement('iframe');
+    iframe.setAttribute('allowfullscreen', '');
+    iframe.style.width = '70vw';
+    iframe.style.height = '70vh';
+    iframe.style.borderRadius = '0';
+    iframe.style.border = 'none';
+    iframe.style.background = '#E4DEBE';
+    iframe.style.display = 'block';
+    iframe.style.margin = '8% auto';
+    modal.appendChild(closeBtn);
+    modal.appendChild(iframe);
     document.body.appendChild(modal);
   }
-  modal.style.display = 'block';
-  modal.querySelector('iframe').src = embedUrl;
-  modal.querySelector('.close').onclick = function () {
+  const iframe = modal.querySelector('iframe');
+  const closeBtn = modal.querySelector('.close');
+  modal.style.display = 'flex';
+  iframe.src = embedUrl;
+  closeBtn.onclick = function () {
     modal.style.display = 'none';
-    modal.querySelector('iframe').src = '';
+    iframe.src = '';
   };
-  // Tutup modal jika klik di luar konten
   modal.onclick = function (e) {
     if (e.target === modal) {
       modal.style.display = 'none';
-      modal.querySelector('iframe').src = '';
+      iframe.src = '';
     }
   };
-  card.appendChild(right);
-  container.appendChild(card);
 }
 
-// tampilkan manga detail
 function renderDetailManga(manga) {
   const container = document.getElementById('detail');
   container.innerHTML = '';
-
   const card = document.createElement('div');
   card.className = 'detail-card';
-
-  // Gambar cover
+  // Kiri
   const left = document.createElement('div');
   left.className = 'detail-left';
-
   const img = document.createElement('img');
   img.src = manga.images?.jpg?.large_image_url || manga.images?.jpg?.image_url || '';
   img.alt = manga.title;
   img.className = 'detail-img';
   left.appendChild(img);
   card.appendChild(left);
-
-  // Info bagian kanan
+  // Kanan
   const right = document.createElement('div');
   right.className = 'detail-right';
-
-  // Judul
   const title = document.createElement('h2');
   title.className = 'detail-title';
   title.textContent = manga.title;
   right.appendChild(title);
-
-  // Informasi detail sebagai tabel, tags digabung
-  const infoTable = document.createElement('table');
-  infoTable.className = 'detail-info-table';
+  // Info table
   const items = [
     { label: 'Type', value: manga.type || '-' },
     { label: 'Volumes', value: manga.volumes || '-' },
@@ -258,7 +237,6 @@ function renderDetailManga(manga) {
     { label: 'Score', value: manga.score || '-' },
     { label: 'Year', value: manga.published?.prop?.from?.year || '-' }
   ];
-  // Gabungkan tags
   if (manga.genres?.length || manga.themes?.length || manga.demographics?.length) {
     const tags = [];
     if (manga.genres) tags.push(...manga.genres.map(g => g.name));
@@ -266,29 +244,12 @@ function renderDetailManga(manga) {
     if (manga.demographics) tags.push(...manga.demographics.map(d => d.name));
     items.push({ label: 'Tags', value: tags.length ? tags.join(', ') : '-' });
   }
-  items.forEach(item => {
-    const tr = document.createElement('tr');
-    tr.className = 'detail-info-row';
-
-    const tdLabel = document.createElement('td');
-    tdLabel.className = 'detail-info-label';
-    tdLabel.textContent = item.label;
-
-    const tdValue = document.createElement('td');
-    tdValue.className = 'detail-info-value';
-    tdValue.textContent = item.value;
-    tr.appendChild(tdLabel);
-    tr.appendChild(tdValue);
-    infoTable.appendChild(tr);
-  });
-  right.appendChild(infoTable);
-
+  right.appendChild(createTable(items, 'detail-info-row', 'detail-info-label', 'detail-info-value'));
   // Sinopsis
   const synopsis = document.createElement('p');
   synopsis.className = 'detail-desc';
   synopsis.textContent = manga.synopsis || 'Tidak ada sinopsis.';
   right.appendChild(synopsis);
-
   card.appendChild(right);
   container.appendChild(card);
 }

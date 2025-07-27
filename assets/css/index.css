@@ -24,6 +24,10 @@
 }
 
 /* trailer */
+#embed-trailers {
+    position: relative;
+}
+
 .trailer-modal {
     position: absolute;
     top: -470px;

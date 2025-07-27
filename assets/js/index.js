@@ -85,45 +85,45 @@ function fetchTopTrailers() {
     .then(json => {
       const data = json.data || [];
       const container = document.getElementById('top-trailers-list');
-      if (!container) return;
-      while (container.firstChild) container.removeChild(container.firstChild);
-      data.forEach(trailer => {
-        const embedUrl = trailer.trailer?.embed_url;
-        if (!embedUrl) return;
-
-        const animeTitle = trailer.entry?.title || '';
-        const img = trailer.entry?.images?.jpg?.image_url || '';
-        const trailerTitle = trailer.title || '';
-
-        const card = createCard(animeTitle, img, trailerTitle, '', 'trailer');
-        card.style.cursor = 'pointer';
-
-        const gambar = card.querySelector('img');
-        card.addEventListener('click', (e) => {
-          e.preventDefault();
-          const section = document.getElementById('top-trailers');
-          if (section) {
-            section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          }
-
-          const modal = document.getElementById('trailer-modal');
-          const iframe = document.getElementById('trailer-iframe');
-          const closeBtn = document.querySelector('#trailer-modal .close');
-          if (!modal || !iframe || !closeBtn) return;
-          iframe.src = embedUrl;
-          modal.style.display = 'block';
-          closeBtn.onclick = () => {
-            iframe.src = '';
-            modal.style.display = 'none';
-          };
-          window.onclick = (event) => {
-            if (event.target === modal) {
-              iframe.src = '';
-              modal.style.display = 'none';
-            }
-          };
+      if (container) {
+        while (container.firstChild) container.removeChild(container.firstChild);
+        data.forEach(trailer => {
+          const embedUrl = trailer.trailer?.embed_url;
+          if (!embedUrl) return;
+          const animeTitle = trailer.entry?.title || '';
+          const img = trailer.entry?.images?.jpg?.image_url || '';
+          const trailerTitle = trailer.title || '';
+          const card = createCard(animeTitle, img, trailerTitle, '', 'trailer');
+          card.style.cursor = 'pointer';
+          card.addEventListener('click', (e) => {
+            e.preventDefault();
+            showTrailerModal(embedUrl);
+          });
+          container.appendChild(card);
         });
-        container.appendChild(card);
-      });
+      }
     });
+}
+
+function showTrailerModal(embedUrl) {
+  const section = document.getElementById('embed-trailers');
+  if (section) {
+    section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+  const modal = document.getElementById('trailer-modal');
+  const iframe = document.getElementById('trailer-iframe');
+  const closeBtn = document.querySelector('#trailer-modal .close');
+  if (!modal || !iframe || !closeBtn) return;
+  iframe.src = embedUrl;
+  modal.style.display = 'block';
+  closeBtn.onclick = () => {
+    iframe.src = '';
+    modal.style.display = 'none';
+  };
+  window.onclick = (event) => {
+    if (event.target === modal) {
+      iframe.src = '';
+      modal.style.display = 'none';
+    }
+  };
 }

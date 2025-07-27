@@ -37,6 +37,7 @@
     width: 90%;
     max-width: 720px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.7);
+    animation: fadeIn 1.0s ease-in-out;
 }
 
 .trailer-modal iframe {
@@ -44,6 +45,7 @@
     height: 400px;
     border-radius: 6px;
     border: none;
+    animation: fadeIn 1.5s ease-in-out;
 }
 
 .trailer-modal .close {

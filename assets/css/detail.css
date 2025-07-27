@@ -1,3 +1,27 @@
+/* Tombol Lihat Trailer */
+.trailer-btn {
+  display: block;
+  margin: 1.2em auto 0.5em auto;
+  background: #A94438;
+  color: #fff;
+  font-weight: 600;
+  font-size: 1.08rem;
+  padding: 0.6em 1.4em;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px #A9443810;
+  cursor: pointer;
+  text-align: center;
+  transition: background 0.2s, color 0.2s;
+}
+
+.trailer-btn:hover,
+.trailer-btn:focus {
+  background: #8c4646;
+  color: #fff;
+  outline: none;
+}
+
 .detail-container {
   display: flex;
   flex-direction: column;
@@ -100,6 +124,7 @@
   align-items: center;
   margin: auto auto;
   animation: fadeIn 1.0s ease-in-out;
+  backdrop-filter: blur(8px);
 }
 
 .trailer-modal .close {
@@ -126,4 +151,3 @@
   margin: 8% auto;
   animation: fadeIn 1.5s ease-in-out;
 }
-

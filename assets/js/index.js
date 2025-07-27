@@ -97,6 +97,11 @@ function fetchTopTrailers() {
         const gambar = card.querySelector('img');
         card.addEventListener('click', (e) => {
           e.preventDefault();
+          // Scroll ke section Popular Anime Trailers
+          const section = document.getElementById('top-trailers');
+          if (section) {
+            section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
           const modal = document.getElementById('trailer-modal');
           const iframe = document.getElementById('trailer-iframe');
           const closeBtn = document.querySelector('#trailer-modal .close');

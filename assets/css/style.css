@@ -145,6 +145,7 @@ ul li.has-drop:focus-within>.drop {
     padding: 1.5rem 2rem;
     border-top: 3px solid #E6BAA3;
     box-shadow: 0 0 30px #A9443810;
+    animation: fadeIn 1.0s ease-in-out;
 }
 
 footer {
@@ -160,7 +161,6 @@ hr {
     height: 2px;
     margin-bottom: 5px;
     background-color: #E6BAA3;
-    /* atau #964B00 */
 }
 
 
@@ -176,7 +176,6 @@ hr {
     scrollbar-width: thin;
     scrollbar-color: #A94438 #E4DEBE;
     animation: fadeIn 1.5s ease-in-out;
-    /* animation-delay: 0.5s; */
 }
 
 @keyframes fadeIn {

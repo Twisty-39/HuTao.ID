@@ -4,6 +4,17 @@
     box-sizing: border-box;
 }
 
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+
+    }
+}
+
 body {
     font-family: 'Poppins', sans-serif;
     background-color: #E4DEBE;
@@ -138,6 +149,7 @@ ul li.has-drop:focus-within>.drop {
     display: block;
 }
 
+/* bungkus konten universal */
 .content-section {
     background: #E4DEBE;
     color: #A94438;
@@ -163,7 +175,6 @@ hr {
     background-color: #E6BAA3;
 }
 
-
 /* style card anime universal */
 .card {
     display: flex;
@@ -176,17 +187,6 @@ hr {
     scrollbar-width: thin;
     scrollbar-color: #A94438 #E4DEBE;
     animation: fadeIn 1.5s ease-in-out;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-
-    }
 }
 
 .anime-item {
@@ -214,10 +214,10 @@ hr {
     object-fit: cover;
     border-radius: 6px;
     margin-bottom: 0.7em;
-    box-shadow: 0 1px 6px #0001;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.500);
     background: #eee;
     display: block;
-    transition: transform 0.25s cubic-bezier(.4, 2, .6, 1);
+    transition: transform 0.3s cubic-bezier(0.4, 2, 0.6, 1);
 }
 
 .anime-item:hover img,
@@ -245,6 +245,7 @@ hr {
     font-weight: 600;
     color: #2d3c5a;
     cursor: pointer;
+    text-decoration: none;
 }
 
 .scroll-title span {

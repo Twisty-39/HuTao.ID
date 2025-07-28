@@ -16,7 +16,7 @@ function fetchSummerAnime() {
       if (container) {
         while (container.firstChild) container.removeChild(container.firstChild);
         data.forEach(anime => {
-          const card = createCard(anime.title, anime.images.webp?.image_url || '', '', anime.mal_id, 'anime');
+          const card = createCard(anime.title, anime.images.webp?.image_url || '', '', anime.mal_id, 'anime'); //lempar ke create card (script.js)
           container.appendChild(card);
         });
       }
@@ -59,9 +59,9 @@ function fetchTopManga() {
 
 //fech top trailer
 function fetchTopTrailers() {
-  fetch('https://api.jikan.moe/v4/watch/promos?limit=15')
-    .then(res => res.json())
-    .then(json => {
+  fetch('https://api.jikan.moe/v4/watch/promos')
+  .then(res => res.json())
+  .then(json => {
       const data = json.data || [];
       const container = document.getElementById('top-trailers-list');
       if (container) {
@@ -69,14 +69,15 @@ function fetchTopTrailers() {
         data.forEach(trailer => {
           const embedUrl = trailer.trailer?.embed_url;
           if (!embedUrl) return;
+
           const animeTitle = trailer.entry?.title || '';
           const img = trailer.entry?.images?.jpg?.image_url || '';
           const trailerTitle = trailer.title || '';
+
           const card = createCard(animeTitle, img, trailerTitle, '', 'trailer');
-          card.style.cursor = 'pointer';
           card.addEventListener('click', (e) => {
             e.preventDefault();
-            showTrailerModal(embedUrl);
+            playTrailer(embedUrl);
           });
           container.appendChild(card);
         });
@@ -84,7 +85,7 @@ function fetchTopTrailers() {
     });
 }
 
-function showTrailerModal(embedUrl) {
+function playTrailer(embedUrl) {
   const section = document.getElementById('embed-trailers');
   if (section) {
     section.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -98,11 +99,5 @@ function showTrailerModal(embedUrl) {
   closeBtn.onclick = () => {
     iframe.src = '';
     modal.style.display = 'none';
-  };
-  window.onclick = (event) => {
-    if (event.target === modal) {
-      iframe.src = '';
-      modal.style.display = 'none';
-    }
   };
 }

@@ -20,13 +20,14 @@ body {
     background-color: #E4DEBE;
     color: #A94438;
     overflow-x: auto;
-    background-image: url('../img/background.jpg');
+    background-image: url('../resource/background.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
     backdrop-filter: blur(5px);
 }
 
+/* bungkus utama */
 .container-main {
     max-width: 1100px;
     min-width: 900px;
@@ -39,11 +40,12 @@ body {
     flex-direction: column;
 }
 
+/* jarak bungkus ke kontainer utama */
 main {
     flex: 1;
     padding: 2.5rem 2.5rem 1.5rem 2.5rem;
     min-height: 100vh;
-    background: #F1F1F1;
+    background: #FFF2EB;
 }
 
 header {
@@ -163,6 +165,7 @@ hr {
     margin-bottom: 5px;
     background-color: #E6BAA3;
 }
+
 /* bungkus konten universal */
 .content-section {
     background: #E4DEBE;
@@ -174,8 +177,7 @@ hr {
     animation: fadeIn 1.0s ease-in-out;
 }
 
-
-/* style card anime universal */
+/* style card universal */
 .card {
     display: flex;
     flex-direction: row;
@@ -189,7 +191,7 @@ hr {
     animation: fadeIn 1.5s ease-in-out;
 }
 
-.anime-item {
+.isi-card {
     background: #E6BAA3;
     border-radius: 8px;
     flex: 0 0 calc(20% - 1.2rem);
@@ -206,8 +208,7 @@ hr {
     justify-content: flex-start;
 }
 
-.anime-item img,
-.anime-img {
+.card-img {
     width: 100%;
     max-width: 130px;
     height: 190px;
@@ -220,8 +221,7 @@ hr {
     transition: transform 0.3s cubic-bezier(0.4, 2, 0.6, 1);
 }
 
-.anime-item:hover img,
-.anime-item:hover .anime-img {
+.isi-card:hover .card-img {
     transform: scale(1.07);
     z-index: 2;
 }
@@ -258,7 +258,7 @@ hr {
     animation: scroll-title-x 4s linear infinite;
 }
 
-.anime-item:hover .scroll-title.scrollable span {
+.isi-card:hover .scroll-title.scrollable span {
     animation: scroll-title-x 4s linear infinite;
 }
 

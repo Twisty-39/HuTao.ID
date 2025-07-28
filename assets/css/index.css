@@ -29,10 +29,10 @@
 }
 
 .trailer-modal {
-    position: absolute;
-    top: -470px;
+    position: fixed;
+    top: 50%;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translate(-50%, 110%);
     background-color: #E4DEBE;
     padding: 10px;
     border-radius: 8px;

@@ -1,15 +1,15 @@
 // render card anime dan manga
 function createCard(judul, img, extra, id, type) {
     const card = document.createElement('a');
-    card.className = 'anime-item';
+    card.className = 'isi-card';
 
     const tipe = type;
-    card.href = id ? `detail.html?id=${id}&type=${tipe}` : '#'; // Link ke detail dengan type
+    card.href = id ? `detail.html?id=${id}&type=${tipe}` : '#'; // Link ke detail dengan type & id
 
     const gambar = document.createElement('img');
     gambar.src = img;
     gambar.alt = judul;
-    gambar.className = 'anime-img';
+    gambar.className = 'card-img';
     card.appendChild(gambar);
 
     const title = document.createElement('div');
@@ -24,7 +24,7 @@ function createCard(judul, img, extra, id, type) {
     }
     card.appendChild(title);
 
-    // extra info (episode di lastes eps)
+    // extra info
     if (extra) {
         const extraDiv = document.createElement('div');
         extraDiv.className = 'extra';

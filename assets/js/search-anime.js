@@ -1,12 +1,12 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     let currentPage = 1;
     let currentGenre = '';
-    let currentAlpha = '';
+    let currentType = '';
     let currentKeyword = '';
     const resultContainer = document.getElementById('anime-search-result');
     const paginationContainer = document.getElementById('pagination');
     const genreSelect = document.getElementById('genre-select');
-    const alphabetFilter = document.getElementById('alphabet-filter');
+    const typeSelect = document.getElementById('type-select');
 
     // Fetch genre list
     fetch('https://api.jikan.moe/v4/genres/anime')
@@ -22,47 +22,52 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
 
-    // Alphabet filter
-    const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
-    alphabet.forEach(char => {
-        const btn = document.createElement('button');
-        btn.textContent = char;
-        btn.addEventListener('click', function() {
-            currentAlpha = char;
-            currentPage = 1;
-            updateAlphabetUI();
-            searchAnime();
-        });
-        alphabetFilter.appendChild(btn);
+    // Manual type list
+    const typeList = ['tv', 'movie', 'ova', 'ona', 'special', 'music'];
+    typeSelect.innerHTML = '<option value="">Semua Tipe</option>';
+    typeList.forEach(t => {
+        const opt = document.createElement('option');
+        opt.value = t;
+        opt.textContent = t.toUpperCase();
+        typeSelect.appendChild(opt);
     });
-    function updateAlphabetUI() {
-        Array.from(alphabetFilter.children).forEach(btn => {
-            btn.classList.toggle('active', btn.textContent === currentAlpha);
-        });
-    }
 
     // Search form
-    document.getElementById('anime-search-form').addEventListener('submit', function(e) {
+    document.getElementById('anime-search-form').addEventListener('submit', function (e) {
         e.preventDefault();
         currentKeyword = document.getElementById('anime-keyword').value.trim();
         currentPage = 1;
         searchAnime();
     });
-    genreSelect.addEventListener('change', function() {
+
+    genreSelect.addEventListener('change', function () {
         currentGenre = genreSelect.value;
         currentPage = 1;
         searchAnime();
     });
 
+    typeSelect.addEventListener('change', function () {
+        currentType = typeSelect.value;
+        currentPage = 1;
+        searchAnime();
+    });
+
     function searchAnime() {
-        resultContainer.innerHTML = '';
+        while (resultContainer.firstChild) {
+            resultContainer.removeChild(resultContainer.firstChild);
+        }
         let url = `https://api.jikan.moe/v4/anime?limit=12&page=${currentPage}`;
         if (currentKeyword) url += `&q=${encodeURIComponent(currentKeyword)}`;
         if (currentGenre) url += `&genres=${currentGenre}`;
-        if (currentAlpha) url += `&letter=${currentAlpha}`;
-        // Loading indicator
+        if (currentType) url += `&type=${currentType}`;
+
         const loading = document.createElement('div');
-        loading.textContent = 'Loading...';
+        loading.className = 'lds-ellipsis';
+        for (let i = 0; i < 4; i++) {
+            const dot = document.createElement('div');
+            loading.appendChild(dot);
+        }
+
         resultContainer.appendChild(loading);
         fetch(url)
             .then(res => res.json())
@@ -74,22 +79,23 @@ document.addEventListener('DOMContentLoaded', function() {
                     paginationContainer.innerHTML = '';
                     return;
                 }
-                // Use card style from style.css (card-container)
+
                 const cardContainer = document.createElement('div');
                 cardContainer.className = 'card-container';
+
                 data.forEach(anime => {
                     const card = document.createElement('a');
                     card.className = 'card anime-item';
                     card.href = `detail.html?id=${anime.mal_id}&type=anime`;
                     card.style.textDecoration = 'none';
                     card.style.color = 'inherit';
-                    // Card image
+
                     const img = document.createElement('img');
                     img.src = anime.images?.jpg?.image_url || '';
                     img.alt = anime.title;
                     img.className = 'card-img anime-img';
                     card.appendChild(img);
-                    // Card title
+
                     const title = document.createElement('div');
                     title.className = 'scroll-title card-title';
                     if (anime.title.length > 12) {
@@ -103,8 +109,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     card.appendChild(title);
                     cardContainer.appendChild(card);
                 });
+
                 resultContainer.appendChild(cardContainer);
-                // Pagination
                 renderPagination(json.pagination);
             });
     }
@@ -112,10 +118,11 @@ document.addEventListener('DOMContentLoaded', function() {
     function renderPagination(pagination) {
         paginationContainer.innerHTML = '';
         if (!pagination) return;
+
         const totalPages = pagination.last_visible_page || 1;
         let start = 1;
         let end = totalPages;
-        // Show max 9 buttons, center current page
+
         if (totalPages > 9) {
             if (currentPage <= 5) {
                 start = 1;
@@ -128,16 +135,18 @@ document.addEventListener('DOMContentLoaded', function() {
                 end = currentPage + 4;
             }
         }
+
         for (let i = start; i <= end; i++) {
             const btn = document.createElement('button');
             btn.textContent = i;
             btn.className = (i === currentPage) ? 'active' : '';
-            btn.addEventListener('click', function() {
+            btn.addEventListener('click', function () {
                 currentPage = i;
                 searchAnime();
             });
             paginationContainer.appendChild(btn);
         }
     }
+
     searchAnime();
 });

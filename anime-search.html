@@ -17,7 +17,7 @@
         <header>
             <h1>HuTao.ID</h1>
             <video class="h-video" autoplay loop muted playsinline>
-                <source src="assets/img/background header.mp4" type="video/mp4">
+                <source src="assets/resource/background header.mp4" type="video/mp4">
             </video>
             <div class="h-overlay"></div>
         </header>
@@ -27,18 +27,18 @@
                 <li class="has-drop">
                     <a href="#">Anime</a>
                     <ul class="drop">
-                        <li><a href="anime_search.html">Anime Search</a></li>
-                        <li><a href="top_anime.html">Top Anime</a></li>
-                        <li><a href="seasonal.html">Seasonal Anime</a></li>
-                        <li><a href="anime_rec.html">Recommendations</a></li>
+                        <li><a href="anime-search.html">Anime Search</a></li>
+                        <li><a href="top-anime.html">Top Anime</a></li>
+                        <li><a href="season.html">Seasonal Anime</a></li>
+                        <li><a href="anime-rec.html">Recommendations</a></li>
                     </ul>
                 </li>
                 <li class="has-drop">
                     <a href="#">Manga</a>
                     <ul class="drop">
-                        <li><a href="manga_search.html">Manga Search</a></li>
-                        <li><a href="top_manga.html">Top Manga</a></li>
-                        <li><a href="manga_rec.html">Recommendations</a></li>
+                        <li><a href="manga-search.html">Manga Search</a></li>
+                        <li><a href="top-manga.html">Top Manga</a></li>
+                        <li><a href="manga-rec.html">Recommendations</a></li>
                     </ul>
                 </li>
                 <li class="has-drop">
@@ -70,18 +70,14 @@
             </ul>
         </nav>
         <main>
-            <section id="#" class="content-section">
+            <section class="content-section">
                 <section class="search-section">
                     <form id="anime-search-form">
-                        <input type="text" id="anime-keyword" placeholder="Cari judul anime..." />
+                        <input type="text" id="anime-keyword" placeholder="Cari anime...">
+                        <select id="genre-select"></select>
+                        <select id="type-select"></select>
                         <button type="submit">Cari</button>
                     </form>
-                    <div class="filter-group">
-                        <label>Genre:</label>
-                        <select id="genre-select"></select>
-                        <label>Alfabet:</label>
-                        <div id="alphabet-filter" class="alphabet-wrap"></div>
-                    </div>
                 </section>
                 <div id="anime-search-result" class="card-container">
                     <!-- Hasil pencarian anime -->
@@ -96,7 +92,7 @@
     </footer>
 
     <script src="assets/js/script.js"></script>
-    <script src="assets/js/search_anime.js"></script>
+    <script src="assets/js/search-anime.js"></script>
 </body>
 
 </html>

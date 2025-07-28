@@ -1,4 +1,4 @@
-// card anime dan manga
+// render card anime dan manga
 function createCard(judul, img, extra, id, type) {
     const card = document.createElement('a');
     card.className = 'anime-item';

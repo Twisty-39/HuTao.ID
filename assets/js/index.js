@@ -3,7 +3,6 @@ document.addEventListener('DOMContentLoaded', function () {
   fetchSummerAnime();
   fetchTopAnime();
   fetchTopManga();
-  fetchLatestEpisodes();
   fetchTopTrailers();
 });
 
@@ -18,26 +17,6 @@ function fetchSummerAnime() {
         while (container.firstChild) container.removeChild(container.firstChild);
         data.forEach(anime => {
           const card = createCard(anime.title, anime.images.webp?.image_url || '', '', anime.mal_id, 'anime');
-          container.appendChild(card);
-        });
-      }
-    });
-}
-
-//fech lastes eps
-function fetchLatestEpisodes() {
-  fetch('https://api.jikan.moe/v4/watch/episodes?limit=15')
-    .then(res => res.json())
-    .then(json => {
-      const data = json.data || [];
-      const container = document.getElementById('latest-episode-list');
-      if (container) {
-        while (container.firstChild) container.removeChild(container.firstChild);
-        data.forEach(ep => {
-          const judul = ep.entry?.title || '';
-          const img = ep.entry?.images.webp?.image_url || '';
-          const epNum = ep.episodes?.[0]?.mal_id ? `Episode ${ep.episodes[0].mal_id}` : '';
-          const card = createCard(judul, img, epNum, ep.entry?.mal_id, 'anime');
           container.appendChild(card);
         });
       }

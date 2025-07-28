@@ -1,17 +1,3 @@
-.detail-container {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  padding: 2rem;
-  background: #E4DEBE;
-  color: #A94438;
-  margin-bottom: 2rem;
-  padding: 1.5rem 2rem;
-  border-top: 3px solid #E6BAA3;
-  box-shadow: 0 0 30px #A9443810;
-  animation: fadeIn 1.5s ease-in-out;
-}
-
 .detail-card {
   display: flex;
   flex-direction: row;

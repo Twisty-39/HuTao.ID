@@ -168,7 +168,6 @@ function renderDetailAnime(anime) {
   container.appendChild(card);
 }
 
-// Modal trailer logic tanpa innerHTML
 function showTrailerModal(embedUrl) {
   let modal = document.getElementById('trailer-modal');
   if (!modal) {

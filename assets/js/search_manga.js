@@ -111,7 +111,5 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             });
     }
-
-    // Load awal
     searchManga();
 });

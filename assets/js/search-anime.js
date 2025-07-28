@@ -3,17 +3,23 @@ document.addEventListener('DOMContentLoaded', function () {
     let currentGenre = '';
     let currentType = '';
     let currentKeyword = '';
-    const resultContainer = document.getElementById('anime-search-result');
-    const paginationContainer = document.getElementById('pagination');
     const genreSelect = document.getElementById('genre-select');
     const typeSelect = document.getElementById('type-select');
+    const resultContainer = document.getElementById('anime-search-result');
+    const paginationContainer = document.getElementById('pagination');
 
     // Fetch genre list
     fetch('https://api.jikan.moe/v4/genres/anime')
         .then(res => res.json())
         .then(json => {
             const genres = json.data || [];
-            genreSelect.innerHTML = '<option value="">Semua Genre</option>';
+            while (genreSelect.firstChild) {
+                genreSelect.removeChild(genreSelect.firstChild);
+            }
+            const defaultGenreOption = document.createElement('option');
+            defaultGenreOption.value = '';
+            defaultGenreOption.textContent = 'Semua Genre';
+            genreSelect.appendChild(defaultGenreOption);
             genres.forEach(g => {
                 const opt = document.createElement('option');
                 opt.value = g.mal_id;
@@ -23,8 +29,14 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 
     // Manual type list
-    const typeList = ['tv', 'movie', 'ova', 'ona', 'special', 'music'];
-    typeSelect.innerHTML = '<option value="">Semua Tipe</option>';
+    const typeList = ['tv', 'movie', 'ova', 'ona', 'special', 'music', 'cm', 'pv', 'tv_special'];
+    while (typeSelect.firstChild) {
+        typeSelect.removeChild(typeSelect.firstChild);
+    }
+    const defaultTypeOption = document.createElement('option');
+    defaultTypeOption.value = '';
+    defaultTypeOption.textContent = 'Semua Tipe';
+    typeSelect.appendChild(defaultTypeOption);
     typeList.forEach(t => {
         const opt = document.createElement('option');
         opt.value = t;
@@ -73,10 +85,16 @@ document.addEventListener('DOMContentLoaded', function () {
             .then(res => res.json())
             .then(json => {
                 const data = json.data || [];
-                resultContainer.innerHTML = '';
+                while (resultContainer.firstChild) {
+                    resultContainer.removeChild(resultContainer.firstChild);
+                }
                 if (data.length === 0) {
-                    resultContainer.textContent = 'Tidak ditemukan.';
-                    paginationContainer.innerHTML = '';
+                    const notFound = document.createElement('p');
+                    notFound.textContent = 'Tidak ditemukan.';
+                    resultContainer.appendChild(notFound);
+                    while (paginationContainer.firstChild) {
+                        paginationContainer.removeChild(paginationContainer.firstChild);
+                    }
                     return;
                 }
 
@@ -84,29 +102,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 cardContainer.className = 'card-container';
 
                 data.forEach(anime => {
-                    const card = document.createElement('a');
-                    card.className = 'card anime-item';
-                    card.href = `detail.html?id=${anime.mal_id}&type=anime`;
-                    card.style.textDecoration = 'none';
-                    card.style.color = 'inherit';
-
-                    const img = document.createElement('img');
-                    img.src = anime.images?.jpg?.image_url || '';
-                    img.alt = anime.title;
-                    img.className = 'card-img anime-img';
-                    card.appendChild(img);
-
-                    const title = document.createElement('div');
-                    title.className = 'scroll-title card-title';
-                    if (anime.title.length > 12) {
-                        title.classList.add('scrollable');
-                        const span = document.createElement('span');
-                        span.textContent = anime.title;
-                        title.appendChild(span);
-                    } else {
-                        title.textContent = anime.title;
-                    }
-                    card.appendChild(title);
+                    const card = createCard(anime.title, anime.images.webp?.image_url || '', '', anime.mal_id, 'anime');
                     cardContainer.appendChild(card);
                 });
 
@@ -116,7 +112,9 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function renderPagination(pagination) {
-        paginationContainer.innerHTML = '';
+        while (paginationContainer.firstChild) {
+            paginationContainer.removeChild(paginationContainer.firstChild);
+        }
         if (!pagination) return;
 
         const totalPages = pagination.last_visible_page || 1;

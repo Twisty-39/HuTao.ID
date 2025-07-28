@@ -1,115 +1,150 @@
-// Manga Search Page
-// Fitur: search by keyword, filter genre, filter alphabet, pagination (limit 10)
-
 document.addEventListener('DOMContentLoaded', function () {
-    const form = document.getElementById('anime-search-form');
-    const keywordInput = document.getElementById('anime-keyword');
-    const genreSelect = document.getElementById('genre-select');
-    const alphabetFilter = document.getElementById('alphabet-filter');
-    const resultSection = document.getElementById('manga-search-result');
-    const pagination = document.getElementById('pagination');
     let currentPage = 1;
     let currentGenre = '';
-    let currentAlpha = '';
+    let currentType = '';
     let currentKeyword = '';
-    const LIMIT = 12;
+    const genreSelect = document.getElementById('genre-select');
+    const typeSelect = document.getElementById('type-select');
+    const resultContainer = document.getElementById('manga-search-result');
+    const paginationContainer = document.getElementById('pagination');
 
-    // Ambil genre manga dari Jikan
+    // Fetch genre list
     fetch('https://api.jikan.moe/v4/genres/manga')
         .then(res => res.json())
         .then(json => {
-            genreSelect.innerHTML = '<option value="">Semua Genre</option>';
-            json.data.forEach(genre => {
+            const genres = json.data || [];
+            while (genreSelect.firstChild) {
+                genreSelect.removeChild(genreSelect.firstChild);
+            }
+            const defaultGenreOption = document.createElement('option');
+            defaultGenreOption.value = '';
+            defaultGenreOption.textContent = 'Semua Genre';
+            genreSelect.appendChild(defaultGenreOption);
+            genres.forEach(g => {
                 const opt = document.createElement('option');
-                opt.value = genre.mal_id;
-                opt.textContent = genre.name;
+                opt.value = g.mal_id;
+                opt.textContent = g.name;
                 genreSelect.appendChild(opt);
             });
         });
 
-    // Buat filter alfabet
-    const alfabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
-    alfabet.forEach(huruf => {
-        const btn = document.createElement('button');
-        btn.type = 'button';
-        btn.className = 'alphabet-btn';
-        btn.textContent = huruf;
-        btn.onclick = () => {
-            currentAlpha = huruf;
-            currentPage = 1;
-            searchManga();
-        };
-        alphabetFilter.appendChild(btn);
+    // Manual type list
+    const typeList = ['manga', 'novel', 'lightnovel', 'oneshot', 'doujin', 'manhwa', 'manhua'];
+    while (typeSelect.firstChild) {
+        typeSelect.removeChild(typeSelect.firstChild);
+    }
+    const defaultTypeOption = document.createElement('option');
+    defaultTypeOption.value = '';
+    defaultTypeOption.textContent = 'Semua Tipe';
+    typeSelect.appendChild(defaultTypeOption);
+    typeList.forEach(t => {
+        const opt = document.createElement('option');
+        opt.value = t;
+        opt.textContent = t.toUpperCase();
+        typeSelect.appendChild(opt);
     });
 
-    // Event submit form
-    form.addEventListener('submit', function (e) {
+    // Search form
+    document.getElementById('manga-search-form').addEventListener('submit', function (e) {
         e.preventDefault();
-        currentKeyword = keywordInput.value.trim();
+        currentKeyword = document.getElementById('manga-keyword').value.trim();
         currentPage = 1;
         searchManga();
     });
 
-    // Event genre
     genreSelect.addEventListener('change', function () {
         currentGenre = genreSelect.value;
         currentPage = 1;
         searchManga();
     });
 
-    // Fungsi pencarian manga
+    typeSelect.addEventListener('change', function () {
+        currentType = typeSelect.value;
+        currentPage = 1;
+        searchManga();
+    });
+
     function searchManga() {
-        resultSection.innerHTML = '';
-        let url = `https://api.jikan.moe/v4/manga?limit=${LIMIT}&page=${currentPage}`;
+        while (resultContainer.firstChild) {
+            resultContainer.removeChild(resultContainer.firstChild);
+        }
+        let url = `https://api.jikan.moe/v4/manga?limit=12&page=${currentPage}`;
         if (currentKeyword) url += `&q=${encodeURIComponent(currentKeyword)}`;
         if (currentGenre) url += `&genres=${currentGenre}`;
-        if (currentAlpha) url += `&letter=${currentAlpha}`;
+        if (currentType) url += `&type=${currentType}`;
 
+        const loading = document.createElement('div');
+        loading.className = 'lds-ellipsis';
+        for (let i = 0; i < 4; i++) {
+            const dot = document.createElement('div');
+            loading.appendChild(dot);
+        }
+
+        resultContainer.appendChild(loading);
         fetch(url)
             .then(res => res.json())
             .then(json => {
-                resultSection.innerHTML = '';
-                if (!json.data || json.data.length === 0) {
-                    resultSection.textContent = 'Tidak ditemukan.';
-                    pagination.innerHTML = '';
+                const data = json.data || [];
+                while (resultContainer.firstChild) {
+                    resultContainer.removeChild(resultContainer.firstChild);
+                }
+                if (data.length === 0) {
+                    const notFound = document.createElement('p');
+                    notFound.textContent = 'Tidak ditemukan.';
+                    resultContainer.appendChild(notFound);
+                    while (paginationContainer.firstChild) {
+                        paginationContainer.removeChild(paginationContainer.firstChild);
+                    }
                     return;
                 }
-                const container = document.createElement('div');
-                container.className = 'card-container';
-                container.style.justifyContent = 'center';
-                json.data.forEach(manga => {
-                    const card = createCard(
-                        manga.title,
-                        manga.images?.jpg?.image_url || '',
-                        null,
-                        manga.mal_id,
-                        'manga'
-                    );
-                    container.appendChild(card);
+
+                const cardContainer = document.createElement('div');
+                cardContainer.className = 'card-container';
+
+                data.forEach(manga => {
+                    const card = createCard(manga.title, manga.images.webp?.image_url || '', '', manga.mal_id, 'manga');
+                    cardContainer.appendChild(card);
                 });
-                resultSection.appendChild(container);
 
-                // Pagination
-                const totalPages = Math.min(json.pagination?.last_visible_page || 1, 50);
-                pagination.innerHTML = '';
-                if (totalPages > 1) {
-                    let start = Math.max(1, currentPage - 4);
-                    let end = Math.min(totalPages, start + 8);
-                    if (end - start < 8) start = Math.max(1, end - 8);
-
-                    for (let i = start; i <= end; i++) {
-                        const btn = document.createElement('button');
-                        btn.className = 'alphabet-btn';
-                        btn.textContent = i;
-                        if (i === currentPage) btn.classList.add('active');
-                        btn.onclick = () => {
-                            currentPage = i;
-                            searchManga();
-                        };
-                        pagination.appendChild(btn);
-                    }
-                }
+                resultContainer.appendChild(cardContainer);
+                renderPagination(json.pagination);
             });
     }
+
+    function renderPagination(pagination) {
+        while (paginationContainer.firstChild) {
+            paginationContainer.removeChild(paginationContainer.firstChild);
+        }
+        if (!pagination) return;
+
+        const totalPages = pagination.last_visible_page || 1;
+        let start = 1;
+        let end = totalPages;
+
+        if (totalPages > 9) {
+            if (currentPage <= 5) {
+                start = 1;
+                end = 9;
+            } else if (currentPage + 4 >= totalPages) {
+                start = totalPages - 8;
+                end = totalPages;
+            } else {
+                start = currentPage - 4;
+                end = currentPage + 4;
+            }
+        }
+
+        for (let i = start; i <= end; i++) {
+            const btn = document.createElement('button');
+            btn.textContent = i;
+            btn.className = (i === currentPage) ? 'active' : '';
+            btn.addEventListener('click', function () {
+                currentPage = i;
+                searchManga();
+            });
+            paginationContainer.appendChild(btn);
+        }
+    }
+
     searchManga();
 });

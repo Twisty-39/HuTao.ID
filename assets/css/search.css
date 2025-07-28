@@ -34,46 +34,12 @@
   background: #d94c4c;
 }
 
-.filter-group {
-  display: flex;
-  align-items: center;
-  gap: 1.2rem;
-  margin-bottom: 0.5rem;
-}
-
-#genre-select {
+#genre-select,
+#type-select {
   padding: 0.4em 1em;
   border-radius: 6px;
   border: 1px solid #E6BAA3;
   font-size: 1.05rem;
-}
-
-#alphabet-filter {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.3em;
-  max-width: 400px;
-}
-
-#alphabet-filter button {
-  background: #fff;
-  color: #A94438;
-  border: 1px solid #E6BAA3;
-  border-radius: 4px;
-  padding: 0.3em 0.7em;
-  font-size: 0.7rem;
-  cursor: pointer;
-}
-
-#alphabet-filter button.active,
-#alphabet-filter button:hover {
-  background: #A94438;
-  color: #fff;
-}
-
-.search-result {
-  margin-top: 1.5rem;
-  min-height: 200px;
 }
 
 .card-container {
@@ -83,6 +49,7 @@
   justify-content: center;
   margin-top: 1.5rem;
   min-height: 200px;
+  animation: fadeIn 1.5s ease-in-out;
 }
 
 .pagination {
@@ -157,6 +124,7 @@
   0% {
     transform: scale(0);
   }
+
   100% {
     transform: scale(1);
   }
@@ -166,6 +134,7 @@
   0% {
     transform: scale(1);
   }
+
   100% {
     transform: scale(0);
   }
@@ -175,6 +144,7 @@
   0% {
     transform: translate(0, 0);
   }
+
   100% {
     transform: translate(24px, 0);
   }

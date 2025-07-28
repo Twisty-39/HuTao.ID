@@ -177,7 +177,7 @@ hr {
     animation: fadeIn 1.0s ease-in-out;
 }
 
-/* style card universal */
+/* style card universal index */
 .card {
     display: flex;
     flex-direction: row;
@@ -191,6 +191,7 @@ hr {
     animation: fadeIn 1.5s ease-in-out;
 }
 
+/* style card universal */
 .isi-card {
     background: #E6BAA3;
     border-radius: 8px;

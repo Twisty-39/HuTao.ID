@@ -1,12 +1,13 @@
 document.addEventListener('DOMContentLoaded', function () {
     let currentPage = 1;
-    const resultContainer = document.getElementById('season-anime-result');
+    const resultContainer = document.getElementById('rec-anime-result');
     const paginationContainer = document.getElementById('pagination');
 
     function seasonAnime() {
         while (resultContainer.firstChild) {
             resultContainer.removeChild(resultContainer.firstChild);
         }
+        // let url = `https://api.jikan.moe/v4/anime/{id}/recommendations`;
         let url = `https://api.jikan.moe/v4/seasons/2025/summer?limit=12&page=${currentPage}`;
 
         const loading = document.createElement('div');

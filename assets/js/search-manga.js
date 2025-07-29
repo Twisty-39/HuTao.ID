@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 
     // Manual type list
-    const typeList = ['manga', 'novel', 'lightnovel', 'oneshot', 'doujin', 'manhwa', 'manhua'];
+    const typeList = ['manga', 'novel', 'lightnovel', 'oneshot', 'manhwa', 'manhua'];
     while (typeSelect.firstChild) {
         typeSelect.removeChild(typeSelect.firstChild);
     }
@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', function () {
     typeList.forEach(t => {
         const opt = document.createElement('option');
         opt.value = t;
-        opt.textContent = t.toUpperCase();
+        opt.textContent = t;
         typeSelect.appendChild(opt);
     });
 

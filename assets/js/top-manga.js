@@ -1,13 +1,13 @@
 document.addEventListener('DOMContentLoaded', function () {
     let currentPage = 1;
-    const resultContainer = document.getElementById('rec-anime-result');
+    const resultContainer = document.getElementById('top-manga-result');
     const paginationContainer = document.getElementById('pagination');
 
-    function recAnime() {
+    function topManga() {
         while (resultContainer.firstChild) {
             resultContainer.removeChild(resultContainer.firstChild);
         }
-        const url = `https://api.jikan.moe/v4/recommendations/anime?page=${currentPage}`;
+        let url = `https://api.jikan.moe/v4/top/manga?limit=12&page=${currentPage}`;
 
         const loading = document.createElement('div');
         loading.className = 'lds-ellipsis';
@@ -37,17 +37,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 const cardContainer = document.createElement('div');
                 cardContainer.className = 'card-container';
 
-                let animeCount = 0;
-
-                for (const group of data) {
-                    for (const anime of group.entry) {
-                        if (animeCount >= 12) break;
-                        const card = createCard(anime.title, anime.images.webp?.image_url || '', '', anime.mal_id, 'anime');
-                        cardContainer.appendChild(card);
-                        animeCount++;
-                    }
-                    if (animeCount >= 12) break;
-                }
+                data.forEach(manga => {
+                    const card = createCard(manga.title, manga.images.webp?.image_url || '', '', manga.mal_id, 'manga');
+                    cardContainer.appendChild(card);
+                });
 
                 resultContainer.appendChild(cardContainer);
                 renderPagination(json.pagination);
@@ -83,11 +76,11 @@ document.addEventListener('DOMContentLoaded', function () {
             btn.className = (i === currentPage) ? 'active' : '';
             btn.addEventListener('click', function () {
                 currentPage = i;
-                recAnime();
+                topManga();
             });
             paginationContainer.appendChild(btn);
         }
     }
 
-    recAnime();
+    topManga();
 });

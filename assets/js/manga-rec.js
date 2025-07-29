@@ -1,13 +1,13 @@
 document.addEventListener('DOMContentLoaded', function () {
     let currentPage = 1;
-    const resultContainer = document.getElementById('rec-anime-result');
+    const resultContainer = document.getElementById('rec-manga-result');
     const paginationContainer = document.getElementById('pagination');
 
-    function recAnime() {
+    function recManga() {
         while (resultContainer.firstChild) {
             resultContainer.removeChild(resultContainer.firstChild);
         }
-        const url = `https://api.jikan.moe/v4/recommendations/anime?page=${currentPage}`;
+        const url = `https://api.jikan.moe/v4/recommendations/manga?page=${currentPage}`;
 
         const loading = document.createElement('div');
         loading.className = 'lds-ellipsis';
@@ -37,16 +37,16 @@ document.addEventListener('DOMContentLoaded', function () {
                 const cardContainer = document.createElement('div');
                 cardContainer.className = 'card-container';
 
-                let animeCount = 0;
+                let mangaCount = 0;
 
                 for (const group of data) {
-                    for (const anime of group.entry) {
-                        if (animeCount >= 12) break;
-                        const card = createCard(anime.title, anime.images.webp?.image_url || '', '', anime.mal_id, 'anime');
+                    for (const manga of group.entry) {
+                        if (mangaCount >= 12) break;
+                        const card = createCard(manga.title, manga.images.webp?.image_url || '', '', manga.mal_id, 'manga');
                         cardContainer.appendChild(card);
-                        animeCount++;
+                        mangaCount++;
                     }
-                    if (animeCount >= 12) break;
+                    if (mangaCount >= 12) break;
                 }
 
                 resultContainer.appendChild(cardContainer);
@@ -83,11 +83,11 @@ document.addEventListener('DOMContentLoaded', function () {
             btn.className = (i === currentPage) ? 'active' : '';
             btn.addEventListener('click', function () {
                 currentPage = i;
-                recAnime();
+                recManga();
             });
             paginationContainer.appendChild(btn);
         }
     }
 
-    recAnime();
+    recManga();
 });

@@ -10,19 +10,6 @@
     color: #d94c4c;
 }
 
-.judul-section {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 0.5rem;
-}
-
-.judul-section h2 {
-    margin: 0;
-    font-size: 1.3rem;
-    font-weight: 700;
-}
-
 /* trailer */
 #embed-trailers {
     position: relative;

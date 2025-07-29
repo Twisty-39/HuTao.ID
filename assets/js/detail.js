@@ -168,42 +168,29 @@ function renderDetailAnime(anime) {
   container.appendChild(card);
 }
 
-function showTrailerModal(embedUrl) {
-  let modal = document.getElementById('trailer-modal');
-  if (!modal) {
-    modal = document.createElement('div');
-    modal.id = 'trailer-modal';
-    modal.className = 'trailer-modal';
-    const closeBtn = document.createElement('span');
-    closeBtn.className = 'close';
-    closeBtn.textContent = '✖';
-    const iframe = document.createElement('iframe');
-    iframe.setAttribute('allowfullscreen', '');
-    iframe.style.width = '70vw';
-    iframe.style.height = '70vh';
-    iframe.style.borderRadius = '0';
-    iframe.style.border = 'none';
-    iframe.style.background = '#E4DEBE';
-    iframe.style.display = 'block';
-    iframe.style.margin = '8% auto';
-    modal.appendChild(closeBtn);
-    modal.appendChild(iframe);
-    document.body.appendChild(modal);
-  }
-  const iframe = modal.querySelector('iframe');
+function showTrailerModal(url) {
+  const modal = document.getElementById('trailer-modal');
+  const iframe = document.getElementById('trailer-iframe');
   const closeBtn = modal.querySelector('.close');
+
+  iframe.src = url;
   modal.style.display = 'flex';
-  iframe.src = embedUrl;
-  closeBtn.onclick = function () {
+
+  const closeModal = () => {
     modal.style.display = 'none';
-    iframe.src = '';
+    iframe.src = ''; // berhentiin video
+    closeBtn.removeEventListener('click', closeModal);
+    window.removeEventListener('click', outsideClick);
   };
-  modal.onclick = function (e) {
-    if (e.target === modal) {
-      modal.style.display = 'none';
-      iframe.src = '';
+
+  const outsideClick = (event) => {
+    if (event.target === modal) {
+      closeModal();
     }
   };
+
+  closeBtn.addEventListener('click', closeModal);
+  window.addEventListener('click', outsideClick);
 }
 
 function renderDetailManga(manga) {

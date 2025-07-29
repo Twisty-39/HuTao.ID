@@ -197,6 +197,12 @@ hr {
     animation: fadeIn 1.0s ease-in-out;
 }
 
+.content-section h3 {
+    text-align: center;
+    margin-top: 5%;
+    margin-bottom: 10%;
+}
+
 /* style card universal index */
 .card {
     display: flex;

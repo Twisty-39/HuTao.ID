@@ -1,0 +1,50 @@
+/* Trailer Modal*/
+.trailer-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.8);
+  display: none;
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+  margin: auto auto;
+  animation: fadeIn 1.0s ease-in-out;
+  backdrop-filter: blur(8px);
+}
+
+.trailer-modal .close {
+  cursor: pointer;
+  right: 18px;
+  top: 18px;
+  position: absolute;
+  font-size: 32px;
+  font-weight: bold;
+  color: #A94438;
+  background: #fff;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px #A9443810;
+  text-shadow: 0px 0px 5px white;
+  padding: 0;
+}
+
+.trailer-modal iframe {
+  width: 70vw;
+  height: 70vh;
+  border-radius: 0;
+  border: none;
+  background: #E4DEBE;
+  box-shadow: none;
+  display: block;
+  justify-content: center;
+  align-items: center;
+  margin: 8% auto;
+  animation: fadeIn 1.5s ease-in-out;
+}

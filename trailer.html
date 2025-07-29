@@ -4,11 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HuTao.ID/detail</title>
+    <title>HuTao.ID</title>
     <link
         href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&family=Poppins:wght@400;700&family=Quicksand:wght@400;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/style-2.css">
+    <link rel="stylesheet" href="assets/css/trailer.css">
 </head>
 
 <body>
@@ -16,7 +18,7 @@
         <header>
             <h1>HuTao.ID</h1>
             <video class="h-video" autoplay loop muted playsinline>
-                <source src="assets/img/background header.mp4" type="video/mp4">
+                <source src="assets/resource/background header.mp4" type="video/mp4">
             </video>
             <div class="h-overlay"></div>
         </header>
@@ -26,18 +28,18 @@
                 <li class="has-drop">
                     <a href="#">Anime</a>
                     <ul class="drop">
-                        <li><a href="anime_search.html">Anime Search</a></li>
-                        <li><a href="top_anime.html">Top Anime</a></li>
-                        <li><a href="seasonal.html">Seasonal Anime</a></li>
-                        <li><a href="anime_rec.html">Recommendations</a></li>
+                        <li><a href="anime-search.html">Anime Search</a></li>
+                        <li><a href="top-anime.html">Top Anime</a></li>
+                        <li><a href="season.html">Seasonal Anime</a></li>
+                        <li><a href="anime-rec.html">Recommendations</a></li>
                     </ul>
                 </li>
                 <li class="has-drop">
                     <a href="#">Manga</a>
                     <ul class="drop">
-                        <li><a href="manga_search.html">Manga Search</a></li>
-                        <li><a href="top_manga.html">Top Manga</a></li>
-                        <li><a href="manga_rec.html">Recommendations</a></li>
+                        <li><a href="manga-search.html">Manga Search</a></li>
+                        <li><a href="top-manga.html">Top Manga</a></li>
+                        <li><a href="manga-rec.html">Recommendations</a></li>
                     </ul>
                 </li>
                 <li class="has-drop">
@@ -69,8 +71,19 @@
             </ul>
         </nav>
         <main>
-            <section id="#" class="content-section">
-                <!-- tempat konten -->
+            <section class="content-section">
+                <div class="judul-section">
+                    <h1>Popular Anime Trailers</h1>
+                </div>
+                <hr>
+                <div id="trailers-anime-result" class="card-container">
+                    <!-- Hasil top trailer -->
+                </div>
+                <div id="pagination" class="pagination"></div>
+                <div id="trailer-modal" class="trailer-modal">
+                    <span class="close" title="Close Trailer">✖</span>
+                    <iframe id="trailer-iframe" allowfullscreen></iframe>
+                </div>
             </section>
         </main>
     </div>
@@ -80,7 +93,7 @@
     </footer>
 
     <script src="assets/js/script.js"></script>
-    <script src="assets/js/detail.js"></script>
+    <script src="assets/js/modal.js"></script>
 </body>
 
 </html>

@@ -74,7 +74,7 @@ function renderDetailAnime(anime) {
   img.className = 'detail-img';
   left.appendChild(img);
 
-  // Trailer
+  // Trailer button
   if (anime.trailer?.embed_url) {
     const trailerBtn = document.createElement('button');
     trailerBtn.className = 'trailer-btn';
@@ -166,31 +166,6 @@ function renderDetailAnime(anime) {
 
   card.appendChild(right);
   container.appendChild(card);
-}
-
-function showTrailerModal(url) {
-  const modal = document.getElementById('trailer-modal');
-  const iframe = document.getElementById('trailer-iframe');
-  const closeBtn = modal.querySelector('.close');
-
-  iframe.src = url;
-  modal.style.display = 'flex';
-
-  const closeModal = () => {
-    modal.style.display = 'none';
-    iframe.src = ''; // berhentiin video
-    closeBtn.removeEventListener('click', closeModal);
-    window.removeEventListener('click', outsideClick);
-  };
-
-  const outsideClick = (event) => {
-    if (event.target === modal) {
-      closeModal();
-    }
-  };
-
-  closeBtn.addEventListener('click', closeModal);
-  window.addEventListener('click', outsideClick);
 }
 
 function renderDetailManga(manga) {

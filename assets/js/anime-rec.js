@@ -38,10 +38,14 @@ document.addEventListener('DOMContentLoaded', function () {
                 cardContainer.className = 'card-container';
 
                 let animeCount = 0;
+                let id = new Set(); // ⬅️ Tambahan untuk nyaring yang udah tampil
 
                 for (const group of data) {
                     for (const anime of group.entry) {
                         if (animeCount >= 12) break;
+                        if (id.has(anime.mal_id)) continue; // ⬅️ Skip kalau udah pernah tampil
+
+                        id.add(anime.mal_id); // ⬅️ Simpan judul yang udah ditampilkan
                         const card = createCard(anime.title, anime.images.webp?.image_url || '', '', anime.mal_id, 'anime');
                         cardContainer.appendChild(card);
                         animeCount++;

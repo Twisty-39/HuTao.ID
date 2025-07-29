@@ -38,10 +38,14 @@ document.addEventListener('DOMContentLoaded', function () {
                 cardContainer.className = 'card-container';
 
                 let mangaCount = 0;
+                let id = new Set(); // ⬅️ Tambahan untuk nyaring yang udah tampil
 
                 for (const group of data) {
                     for (const manga of group.entry) {
                         if (mangaCount >= 12) break;
+                        if (id.has(manga.mal_id)) continue; // ⬅️ Skip kalau udah pernah tampil
+
+                        id.add(manga.mal_id); // ⬅️ Simpan judul yang udah ditampilkan
                         const card = createCard(manga.title, manga.images.webp?.image_url || '', '', manga.mal_id, 'manga');
                         cardContainer.appendChild(card);
                         mangaCount++;

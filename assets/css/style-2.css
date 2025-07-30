@@ -42,6 +42,18 @@
   font-size: 1.05rem;
 }
 
+/* Responsive breakpoint */
+@media (max-width: 600px) {
+  .search-section form {
+    flex-direction: column;
+  }
+
+  .search-section input[type="text"],
+  .search-section button {
+    width: 100%;
+  }
+}
+
 /* universal (ex-index) */
 .card-container {
   display: flex;

@@ -94,6 +94,7 @@ nav {
 nav ul {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     gap: 0.5rem;
     list-style: none;
     margin: 0;
@@ -308,4 +309,140 @@ h3 {
 .about {
     margin-left: 5%;
     margin-bottom: 2%;
+}
+
+/* Adjust container-main */
+.container-main {
+    width: 100%;
+    max-width: 1024px;
+    margin: 0 auto;
+    padding: 0;
+}
+
+/* Base font scaling */
+html {
+    font-size: 100%;
+}
+
+@media (max-width: 1024px) {
+    html {
+        font-size: 92%;
+    }
+}
+
+@media (max-width: 768px) {
+    html {
+        font-size: 84%;
+    }
+}
+
+@media (max-width: 480px) {
+    html {
+        font-size: 76%;
+    }
+}
+
+/* Header text scaling */
+header h1 {
+    font-size: 3rem;
+    margin-left: 2rem;
+}
+
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2.2rem;
+        margin-left: 1rem;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 1.8rem;
+    }
+}
+
+/* Nav layout untuk mobile: 3 tombol/row */
+@media (max-width: 768px) {
+    nav ul {
+        padding: 0 1rem;
+    }
+
+    nav ul li {
+        flex: 1 0 30%;
+        text-align: center;
+    }
+}
+
+/* Isi-card scaling smart */
+.isi-card {
+    flex: 0 0 calc(25% - 1rem);
+    transform: scale(1);
+    transition: transform 0.3s ease-in-out;
+}
+
+@media (max-width: 1024px) {
+  .isi-card {
+    flex: 0 0 calc(33.333% - 1rem);
+    margin: 0 0.5rem 1rem;
+    transform: scale(0.95);
+  }
+}
+
+@media (max-width: 768px) {
+  .isi-card {
+    flex: 0 0 calc(50% - 1rem);
+    margin: 0 0.5rem 1rem;
+    transform: scale(0.9);
+  }
+}
+
+@media (max-width: 480px) {
+  .isi-card {
+    flex: 0 0 100%;
+    margin: 0 0 1rem;
+    transform: scale(0.85);
+  }
+}
+/* Card image responsive */
+.card-img {
+    height: 200px;
+}
+
+@media (max-width: 768px) {
+    .card-img {
+        height: 160px;
+        width: 140px;
+    }
+}
+
+@media (max-width: 480px) {
+    .card-img {
+        height: 140px;
+        width: 100px;
+    }
+}
+
+/* Scroll titles responsive text */
+.scroll-title {
+    font-size: 1rem;
+}
+
+@media (max-width: 768px) {
+    .scroll-title {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .scroll-title {
+        font-size: 0.85rem;
+    }
+}
+
+/* Main padding untuk mobile */
+@media (max-width: 768px) {
+    main {
+        padding: 1.5rem 1rem;
+    }
 }

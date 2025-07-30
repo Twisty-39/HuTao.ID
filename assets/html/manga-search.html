@@ -4,12 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HuTao.ID</title>
+    <title>HuTao.ID/manga/search</title>
     <link
         href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&family=Poppins:wght@400;700&family=Quicksand:wght@400;700&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/style-2.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/style-2.css">
 </head>
 
 <body>
@@ -17,13 +17,13 @@
         <header>
             <h1>HuTao.ID</h1>
             <video class="h-video" autoplay loop muted playsinline>
-                <source src="assets/resource/background header.mp4" type="video/mp4">
+                <source src="../resource/background_header.mp4" type="video/mp4">
             </video>
             <div class="h-overlay"></div>
         </header>
         <nav>
             <ul>
-                <li><a href="index.html">Home</a></li>
+                <li><a href="/index.html">Home</a></li>
                 <li class="has-drop">
                     <a href="#">Anime</a>
                     <ul class="drop">
@@ -42,41 +42,39 @@
                     </ul>
                 </li>
                 <li class="has-drop">
-                    <a href="#">Industry</a>
-                    <ul class="drop">
-                        <li><a href="#">Producers</a></li>
-                    </ul>
-                </li>
-                <li class="has-drop">
                     <a href="#">Watch</a>
                     <ul class="drop">
-                        <li><a href="#">Episode Videos</a></li>
+                        <li><a href="watch.html">Episode Videos</a></li>
                         <li><a href="trailer.html">Anime Trailers</a></li>
                     </ul>
                 </li>
                 <li class="has-drop">
                     <a href="#">Read</a>
                     <ul class="drop">
-                        <li><a href="#">Manga Store</a></li>
+                        <li><a href="manga-store.html">Manga Store</a></li>
                     </ul>
                 </li>
                 <li class="has-drop">
                     <a href="#">Help</a>
                     <ul class="drop">
-                        <li><a href="#">About</a></li>
-                        <li><a href="#">Contact</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="contact.html">Contact</a></li>
                     </ul>
                 </li>
             </ul>
         </nav>
         <main>
             <section class="content-section">
-                <div class="judul-section">
-                    <h1>Top Manga</h1>
-                </div>
-                <hr>
-                <div id="top-manga-result" class="card-container">
-                    <!-- Hasil top manga -->
+                <section class="search-section">
+                    <form id="manga-search-form">
+                        <input type="text" id="manga-keyword" placeholder="Cari anime...">
+                        <select id="genre-select"></select>
+                        <select id="type-select"></select>
+                        <button type="submit">Cari</button>
+                    </form>
+                </section>
+                <div id="manga-search-result" class="card-container">
+                    <!-- Hasil pencarian manga -->
                 </div>
                 <div id="pagination" class="pagination"></div>
             </section>
@@ -87,8 +85,8 @@
         <p>&copy; 2025 Hu Tao Spirit by Twisty. All rights reserved.</p>
     </footer>
 
-    <script src="assets/js/script.js"></script>
-    <script src="assets/js/top-manga.js"></script>
+    <script src="../js/script.js"></script>
+    <script src="../js/search-manga.js"></script>
 </body>
 
 </html>

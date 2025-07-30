@@ -4,7 +4,7 @@ function createCard(judul, img, extra, id, type) {
     card.className = 'isi-card';
 
     const tipe = type;
-    card.href = id ? `../assets/html/detail.html?id=${id}&type=${tipe}` : '#'; // Link ke detail dengan type & id
+    card.href = id ? `../html/detail.html?id=${id}&type=${tipe}` : '#'; // Link ke detail dengan type & id
 
     const gambar = document.createElement('img');
     gambar.src = img;

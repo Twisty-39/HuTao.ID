@@ -29,8 +29,8 @@ body {
 
 /* bungkus utama */
 .container-main {
-    max-width: 1100px;
-    min-width: 100%;
+    max-width: 1024px;
+    width: 100%;
     margin: 0 auto;
     background: #fff;
     box-shadow: 0 0 30px #A9443840;
@@ -40,20 +40,20 @@ body {
     flex-direction: column;
 }
 
-/* jarak bungkus ke kontainer utama */
+/* padding konten */
 main {
-    flex: 1;
     padding: 2.5rem 2.5rem 1.5rem 2.5rem;
     min-height: 100vh;
     background: #FFF2EB;
 }
 
+/* header */
 header {
     position: relative;
     width: 100%;
     max-width: 100%;
     margin: 0 auto;
-    height: 180px;
+    height: 180px; /* res */
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -76,13 +76,14 @@ header {
 header h1 {
     z-index: 3;
     color: #fff;
-    font-size: 4.1rem;
+    font-size: 4.1rem; /* res */
     letter-spacing: 2px;
-    margin: 0 0 0 2.2rem;
+    margin: 0 0 0 2.2rem; /* res */
     text-align: left;
     text-shadow: 0 0px 20px #000a;
 }
 
+/* navigasi */
 nav {
     background: #A94438;
     display: flex;
@@ -95,6 +96,7 @@ nav ul {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    justify-content: center;
     gap: 0.5rem;
     list-style: none;
     margin: 0;
@@ -104,11 +106,12 @@ nav ul {
 nav ul li a {
     color: #fff;
     text-decoration: none;
-    font-weight: 600;
+    font-weight: 600; /* bold */
     font-size: 1.08rem;
     padding: 0.5rem 1.1rem;
     transition: background 0.2s, color 0.2s;
     display: block;
+    justify-content: center;
 }
 
 nav ul li a:hover,
@@ -117,14 +120,9 @@ nav ul li a:focus {
     color: #E6BAA3;
 }
 
-nav ul li {
-    position: relative;
-}
-
 nav ul li .drop {
     display: none;
     position: absolute;
-    min-width: 170px;
     background: #fff;
     border-radius: 0 0 10px 10px;
     box-shadow: 0 0px 30px #A9443840;
@@ -135,9 +133,8 @@ nav ul li .drop {
 
 nav ul li .drop li a {
     color: #A94438;
-    padding: 0.6rem 1.2rem;
-    font-size: 1rem;
-    font-weight: 500;
+    padding: 0.6rem;
+    font-weight: 500; /* thint */
     display: block;
     transition: background 0.2s, color 0.2s;
 }
@@ -152,6 +149,7 @@ ul li.has-drop:focus-within>.drop {
     display: block;
 }
 
+/* footer */
 footer {
     background-color: #A94438;
     color: #fff;
@@ -167,6 +165,7 @@ hr {
     background-color: #E6BAA3;
 }
 
+/* judul konten index */
 .judul-section {
     display: flex;
     align-items: center;
@@ -178,13 +177,14 @@ hr {
 .content-section {
     background: #E4DEBE;
     color: #A94438;
-    margin-bottom: 2rem;
-    padding: 1.5rem 2rem;
+    margin-bottom: 2rem; /* res */
+    padding: 1.5rem 2rem; /* res */
     border-top: 3px solid #E6BAA3;
     box-shadow: 0 0 30px #A9443810;
     animation: fadeIn 1.0s ease-in-out;
 }
 
+/* buat set help */
 .content-section p {
     text-align: justify;
     margin-bottom: 2%;
@@ -208,7 +208,6 @@ h3 {
     flex-wrap: nowrap;
     gap: 1.2rem;
     overflow-x: auto;
-    cursor: pointer;
     padding-bottom: 0.5rem;
     scrollbar-width: thin;
     scrollbar-color: #A94438 #E4DEBE;
@@ -219,24 +218,25 @@ h3 {
 .isi-card {
     background: #E6BAA3;
     border-radius: 8px;
-    flex: 0 0 calc(20% - 1.2rem);
-    min-width: 140px;
-    max-width: 190px;
+    flex: 0 0 calc(20% - 1.2rem); /* res */
+    min-width: 140px; /* res */
+    max-width: 190px; /* res */
     margin: 0;
     padding: 0.9rem;
     color: #A94438;
-    box-shadow: 0 2px 8px 0 #A9443810;
+    box-shadow: 0 0px 10px #A9443810;
     text-align: center;
     display: flex;
+    cursor: pointer;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
 }
 
+/* img isi-card  */
 .card-img {
     width: 100%;
-    max-width: 130px;
-    height: 190px;
+    max-width: 130px; /* res */
+    height: 190px; /* res */
     object-fit: cover;
     border-radius: 6px;
     margin-bottom: 0.7em;
@@ -248,15 +248,16 @@ h3 {
 
 .isi-card:hover .card-img {
     transform: scale(1.07);
-    z-index: 2;
 }
 
+/* judul pv  */
 .extra {
     font-size: 0.9rem;
     color: #2d3c5a;
     margin-top: 0.5rem;
 }
 
+/* judul isi-card  */
 .scroll-title {
     display: block;
     width: 100%;
@@ -302,147 +303,5 @@ h3 {
 
     100% {
         transform: translateX(calc(-100% + 130px));
-    }
-}
-
-/* help */
-.about {
-    margin-left: 5%;
-    margin-bottom: 2%;
-}
-
-/* Adjust container-main */
-.container-main {
-    width: 100%;
-    max-width: 1024px;
-    margin: 0 auto;
-    padding: 0;
-}
-
-/* Base font scaling */
-html {
-    font-size: 100%;
-}
-
-@media (max-width: 1024px) {
-    html {
-        font-size: 92%;
-    }
-}
-
-@media (max-width: 768px) {
-    html {
-        font-size: 84%;
-    }
-}
-
-@media (max-width: 480px) {
-    html {
-        font-size: 76%;
-    }
-}
-
-/* Header text scaling */
-header h1 {
-    font-size: 3rem;
-    margin-left: 2rem;
-}
-
-@media (max-width: 768px) {
-    header h1 {
-        font-size: 2.2rem;
-        margin-left: 1rem;
-        text-align: center;
-    }
-}
-
-@media (max-width: 480px) {
-    header h1 {
-        font-size: 1.8rem;
-    }
-}
-
-/* Nav layout untuk mobile: 3 tombol/row */
-@media (max-width: 768px) {
-    nav ul {
-        padding: 0 1rem;
-    }
-
-    nav ul li {
-        flex: 1 0 30%;
-        text-align: center;
-    }
-}
-
-/* Isi-card scaling smart */
-.isi-card {
-    flex: 0 0 calc(25% - 1rem);
-    transform: scale(1);
-    transition: transform 0.3s ease-in-out;
-}
-
-@media (max-width: 1024px) {
-  .isi-card {
-    flex: 0 0 calc(33.333% - 1rem);
-    margin: 0 0.5rem 1rem;
-    transform: scale(0.95);
-  }
-}
-
-@media (max-width: 768px) {
-  .isi-card {
-    flex: 0 0 calc(50% - 1rem);
-    margin: 0 0.5rem 1rem;
-    transform: scale(0.9);
-  }
-}
-
-@media (max-width: 480px) {
-  .isi-card {
-    flex: 0 0 100%;
-    margin: 0 0 1rem;
-    transform: scale(0.85);
-  }
-}
-/* Card image responsive */
-.card-img {
-    height: 200px;
-}
-
-@media (max-width: 768px) {
-    .card-img {
-        height: 160px;
-        width: 140px;
-    }
-}
-
-@media (max-width: 480px) {
-    .card-img {
-        height: 140px;
-        width: 100px;
-    }
-}
-
-/* Scroll titles responsive text */
-.scroll-title {
-    font-size: 1rem;
-}
-
-@media (max-width: 768px) {
-    .scroll-title {
-        font-size: 0.9rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .scroll-title {
-        font-size: 0.85rem;
-    }
-}
-
-/* Main padding untuk mobile */
-@media (max-width: 768px) {
-    main {
-        padding: 1.5rem 1rem;
     }
 }

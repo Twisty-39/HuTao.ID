@@ -25,7 +25,7 @@
     border-radius: 8px;
     display: none;
     z-index: 100;
-    width: 90%;
+    width: 100%;
     max-width: 720px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.7);
     animation: fadeIn 1.0s ease-in-out;

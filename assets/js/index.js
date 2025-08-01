@@ -106,7 +106,7 @@ async function fetchTopTrailers() {
 function playTrailer(embedUrl) {
   const section = document.getElementById('embed-trailers');
   if (section) {
-    section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    section.scrollIntoView({ bottom: 0, behavior: 'smooth' });
   }
   const modal = document.getElementById('trailer-modal');
   const iframe = document.getElementById('trailer-iframe');

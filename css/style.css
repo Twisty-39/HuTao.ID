@@ -32,7 +32,7 @@ body {
     width: 100%;
     max-width: 1024px;
     margin: 0 auto;
-    background: #fff;
+    background: #FFF2EB;
     box-shadow: 0 0 20px #A9443840;
     /* padding: 2rem 0 0 0; */
     /* overflow-x: visible; */
@@ -410,6 +410,7 @@ h3 {
 
     nav {
         min-height: 24px;
+        margin-bottom: 1.1rem;
     }
 
     nav ul li a {

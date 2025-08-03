@@ -121,7 +121,7 @@
 
   .card-container {
     margin-top: 1.0rem;
-    min-height: 200px;
+    gap: 1.0rem;
   }
 
   .pagination {
@@ -163,7 +163,7 @@
 
   .card-container {
     margin-top: 1.0rem;
-    min-height: 200px;
+    gap: 0.8rem;
   }
 
   .pagination {

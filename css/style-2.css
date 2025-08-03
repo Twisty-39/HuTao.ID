@@ -92,7 +92,7 @@
 }
 
 /* tablet */
-@media screen and (max-width: 780px) {
+@media (max-width: 780px) {
 
   .search-section {
     padding: 1.0rem 1.5rem;
@@ -134,7 +134,7 @@
 }
 
 /* handphone */
-@media screen and (max-width: 780px) {
+@media (max-width: 780px) {
 
   .search-section {
     padding: 0.7rem 1.0rem;

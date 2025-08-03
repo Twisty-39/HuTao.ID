@@ -73,6 +73,29 @@ header {
     z-index: 2;
 }
 
+.h-mobile {
+    display: none;
+}
+
+/* biar gk ngelek */
+@media (max-width: 450px) {
+    .h-video {
+        display: none;
+    }
+
+    .h-mobile {
+        display: block;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        background-image: url('../assets/header_mobile.jpg');
+        background-size: cover;
+        background-position: top center;
+    }
+}
+
 header h1 {
     z-index: 3;
     color: #fff;
@@ -317,7 +340,7 @@ h3 {
 }
 
 /* tablet */
-@media screen and (max-width: 780px) {
+@media (max-width: 780px) {
 
     main {
         padding: 1.8rem;

@@ -50,7 +50,7 @@
 }
 
 /* tablet */
-@media screen and (max-width: 780px) {
+@media (max-width: 780px) {
 
     .trailer-modal {
         transform: translate(-50%, 125%);
@@ -67,7 +67,7 @@
 }
 
 /* handphone */
-@media screen and (max-width: 450px) {
+@media (max-width: 450px) {
 
     .trailer-modal {
         transform: translate(-50%, 140%);

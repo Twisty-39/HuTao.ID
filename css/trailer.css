@@ -48,7 +48,7 @@
 }
 
 /* tablet */
-@media screen and (max-width: 780px) {
+@media (max-width: 780px) {
 
   .trailer-modal .close {
     right: 18px;
@@ -61,7 +61,7 @@
 }
 
 /* handphone */
-@media screen and (max-width: 780px) {
+@media (max-width: 780px) {
 
   .trailer-modal .close {
     right: 18px;

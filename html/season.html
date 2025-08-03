@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HuTao.ID/anime/stream-eps</title>
-    <link rel="Icon" href="../resource/icon.png">
+    <title>HuTao.ID/anime/seasonal/summer</title>
+    <link rel="Icon" href="../assets/icon.png">
     <link
         href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&family=Poppins:wght@400;700&family=Quicksand:wght@400;700&display=swap"
         rel="stylesheet">
@@ -18,13 +18,13 @@
         <header>
             <h1>HuTao.ID</h1>
             <video class="h-video" autoplay loop muted playsinline>
-                <source src="../resource/background_header.mp4" type="video/mp4">
+                <source src="../assets/background_header.mp4" type="video/mp4">
             </video>
             <div class="h-overlay"></div>
         </header>
         <nav>
             <ul>
-                <li><a href="../../index.html">Home</a></li>
+                <li><a href="../index.html">Home</a></li>
                 <li class="has-drop">
                     <a href="#">Anime</a>
                     <ul class="drop">
@@ -66,10 +66,12 @@
         </nav>
         <main>
             <section class="content-section">
-                <h1>Apologies, the feature is not available yet.~</h1>
+                <h1>Seasonal Summer</h1>
                 <hr>
-                <h3>Maaf, saat ini fitur streaming episode anime belum tersedia karena keterbatasan dari API yang
-                    digunakan. Kami sedang berusaha mencari solusi terbaik untuk ke depannya.</h3>
+                <div id="season-anime-result" class="card-container">
+                    <!-- Hasil season anime -->
+                </div>
+                <div id="pagination" class="pagination"></div>
             </section>
         </main>
     </div>
@@ -78,6 +80,8 @@
         <p>&copy; 2025 Hu Tao Spirit by Twisty. All rights reserved.</p>
     </footer>
 
+    <script src="../js/script.js"></script>
+    <script src="../js/season.js"></script>
 </body>
 
 </html>

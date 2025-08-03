@@ -129,13 +129,13 @@ function renderDetailAnime(anime) {
   if (anime.titles && Array.isArray(anime.titles)) {
     const titleList = document.createElement('div');
     titleList.style.fontSize = '1rem';
-    titleList.style.marginBottom = '0.5em';
+    titleList.style.margin = '0';
     anime.titles.forEach(t => {
-      const span = document.createElement('span');
-      span.textContent = `${t.type}: ${t.title}`;
-      span.style.marginRight = '1em';
-      span.style.color = '#6d2b2b';
-      titleList.appendChild(span);
+      const p = document.createElement('p');
+      p.textContent = `${t.type} : ${t.title}`;
+      p.style.marginRight = '1em';
+      p.style.color = '#6d2b2b';
+      titleList.appendChild(p);
     });
     right.appendChild(titleList);
   }

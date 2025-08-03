@@ -48,3 +48,33 @@
     color: #A94438;
     text-shadow: 0px 0px 5px white;
 }
+
+/* tablet */
+@media screen and (max-width: 780px) {
+
+    .trailer-modal {
+        transform: translate(-50%, 125%);
+        max-width: 620px;
+    }
+
+    .trailer-modal iframe {
+        height: 300px;
+    }
+
+    .trailer-modal .close {
+        font-size: 20px;
+    }
+}
+
+/* handphone */
+@media screen and (max-width: 450px) {
+
+    .trailer-modal {
+        transform: translate(-50%, 140%);
+        max-width: 350px;
+    }
+
+    .trailer-modal iframe {
+        height: 190px;
+    }
+}

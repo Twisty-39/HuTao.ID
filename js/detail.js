@@ -65,37 +65,33 @@ function renderDetailAnime(anime) {
   const card = document.createElement('div');
   card.className = 'detail-card';
 
-  // Kiri
+  // kiri
   const left = document.createElement('div');
   left.className = 'detail-left';
+
+  // inner pembungkus untuk gambar dan konten kiri lainnya
+  const innerTop = document.createElement('div');
+  innerTop.className = 'detail-left-top';
+
+  // gambar
   const img = document.createElement('img');
   img.src = anime.images?.jpg?.image_url || '';
   img.alt = anime.title;
   img.className = 'detail-img';
-  left.appendChild(img);
 
-  // Trailer button
-  if (anime.trailer?.embed_url) {
-    const trailerBtn = document.createElement('button');
-    trailerBtn.className = 'trailer-btn';
-    trailerBtn.textContent = 'Lihat Trailer';
-    trailerBtn.onclick = function (e) {
-      e.preventDefault();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-      showTrailerModal(anime.trailer.embed_url);
-    };
-    left.appendChild(trailerBtn);
-  }
+  // container informasi prod/stream
+  const prodInfo = document.createElement('div');
+  prodInfo.className = 'detail-prod-wrapper';
 
-  // Prod table
+  // prod table
   const prodRows = [
     { label: 'Studios', value: anime.studios?.map(s => s.name).join(', ') },
     { label: 'Producers', value: anime.producers?.map(p => p.name).join(', ') },
     { label: 'Licensors', value: anime.licensors?.map(l => l.name).join(', ') }
   ];
-  left.appendChild(createTable(prodRows, 'detail-prod-row', 'detail-prod-label', 'detail-prod-value'));
+  prodInfo.appendChild(createTable(prodRows, 'detail-prod-row', 'detail-prod-label', 'detail-prod-value'));
 
-  // Streaming
+  // streaming
   if (anime.streaming?.length) {
     const streamTable = document.createElement('table');
     const tr = document.createElement('tr');
@@ -115,8 +111,26 @@ function renderDetailAnime(anime) {
     tr.appendChild(tdLabel);
     tr.appendChild(tdValue);
     streamTable.appendChild(tr);
-    left.appendChild(streamTable);
+    prodInfo.appendChild(streamTable);
   }
+
+  // gabung gambar + info
+  innerTop.appendChild(img);
+  innerTop.appendChild(prodInfo);
+
+  // tombol trailer
+  const trailerBtn = document.createElement('button');
+  trailerBtn.className = 'trailer-btn';
+  trailerBtn.textContent = 'Lihat Trailer';
+  trailerBtn.onclick = function (e) {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    showTrailerModal(anime.trailer.embed_url);
+  };
+
+  // rakit left
+  left.appendChild(innerTop);
+  left.appendChild(trailerBtn);
   card.appendChild(left);
 
   // Kanan

@@ -213,4 +213,5 @@ function renderDetailManga(manga) {
   right.appendChild(synopsis);
   card.appendChild(right);
   container.appendChild(card);
+  
 }

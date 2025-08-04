@@ -382,9 +382,10 @@ h3 {
     .teks h2 {
         font-size: 1.1rem;
     }
-
+    
     .list {
         margin-left: 6%;
+        font-size: 1rem;
     }
 
     @keyframes scroll-title-x-small {
@@ -484,6 +485,7 @@ h3 {
 
     .list {
         margin-left: 7%;
+        font-size: 0.8rem;
     }
 
 }

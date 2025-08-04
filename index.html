@@ -5,27 +5,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HuTao.ID/Home</title>
+
+    <!-- Favicon -->
     <link rel="Icon" href="assets/icon.png">
+
+    <!-- Import Google Fonts -->
     <link
         href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&family=Poppins:wght@400;700&family=Quicksand:wght@400;700&display=swap"
         rel="stylesheet">
+
+    <!-- Import file CSS eksternal -->
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/index.css">
 </head>
 
 <body>
     <div class="container-main">
+        <!-- Bagian Header -->
         <header>
             <h1>HuTao.ID</h1>
+            <!-- Background video untuk header -->
             <video class="h-video" autoplay loop muted playsinline>
                 <source src="assets/background_header.mp4" type="video/mp4">
             </video>
-            <div class="h-mobile"></div>
-            <div class="h-overlay"></div>
+            <div class="h-mobile"></div> <!-- versi mobile (diganti gambar) -->
+            <div class="h-overlay"></div> <!-- Efek overlay  -->
         </header>
+
+        <!-- Navigasi utama -->
         <nav>
             <ul>
                 <li><a href="index.html">Home</a></li>
+
+                <!-- Dropdown menu Anime -->
                 <li class="has-drop">
                     <a href="#">Anime</a>
                     <ul class="drop">
@@ -35,6 +47,8 @@
                         <li><a href="html/anime-rec.html">Recommendations</a></li>
                     </ul>
                 </li>
+
+                <!-- Dropdown menu Manga -->
                 <li class="has-drop">
                     <a href="#">Manga</a>
                     <ul class="drop">
@@ -43,6 +57,8 @@
                         <li><a href="html/manga-rec.html">Recommendations</a></li>
                     </ul>
                 </li>
+
+                <!-- Dropdown menu Watch -->
                 <li class="has-drop">
                     <a href="#">Watch</a>
                     <ul class="drop">
@@ -50,12 +66,16 @@
                         <li><a href="html/trailer.html">Anime Trailers</a></li>
                     </ul>
                 </li>
+
+                <!-- Dropdown menu Read -->
                 <li class="has-drop">
                     <a href="#">Read</a>
                     <ul class="drop">
                         <li><a href="html/manga-store.html">Manga Store</a></li>
                     </ul>
                 </li>
+
+                <!-- Dropdown menu Help -->
                 <li class="has-drop">
                     <a href="#">Help</a>
                     <ul class="drop">
@@ -65,7 +85,11 @@
                 </li>
             </ul>
         </nav>
+
+        <!-- Konten utama -->
         <main>
+
+            <!-- Section: Anime Summer -->
             <section class="content-section-2">
                 <div class="judul-section">
                     <h2>Summer 2025 Anime</h2>
@@ -77,6 +101,7 @@
                 </div>
             </section>
 
+            <!-- Section: Top Anime -->
             <section class="content-section-2">
                 <div class="judul-section">
                     <h2>Top Anime</h2>
@@ -88,6 +113,7 @@
                 </div>
             </section>
 
+            <!-- Section: Top Manga -->
             <section class="content-section-2">
                 <div class="judul-section">
                     <h2>Top Manga</h2>
@@ -99,6 +125,7 @@
                 </div>
             </section>
 
+            <!-- Section: Trailer Populer -->
             <section class="content-section">
                 <div class="judul-section">
                     <h2>Popular Anime Trailers</h2>
@@ -110,20 +137,23 @@
                 </div>
             </section>
 
+            <!-- Modal untuk menampilkan trailer video -->
             <section id="embed-trailers">
                 <div id="trailer-modal" class="trailer-modal">
                     <span class="close" title="Close Trailer"> ✖ </span>
                     <iframe id="trailer-iframe" allowfullscreen></iframe>
-                    <!-- Modal Trailer -->
                 </div>
             </section>
+
         </main>
     </div>
 
+    <!-- Footer -->
     <footer>
         <p>&copy; 2025 Hu Tao Spirit by Twisty. All rights reserved.</p>
     </footer>
 
+    <!-- JavaScript eksternal -->
     <script src="js/script-index.js"></script>
     <script src="js/index.js"></script>
 </body>

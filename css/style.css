@@ -391,6 +391,10 @@ h3 {
         font-size: 0.9rem;
     }
 
+    h3 {
+        font-size: 0.9rem;
+    }
+
     @keyframes scroll-title-x-small {
         0% {
             transform: translateX(0);
@@ -432,12 +436,12 @@ h3 {
     }
 
     nav {
-        min-height: 24px;
+        min-height: 26px;
         margin-bottom: 1.1rem;
     }
 
     nav ul li a {
-        font-size: 0.6rem;
+        font-size: 0.7rem;
         padding: 0.4rem;
     }
 
@@ -485,4 +489,9 @@ h3 {
     p {
         font-size: 0.7rem;
     }
+
+    h3 {
+        font-size: 0.7rem;
+    }
+
 }

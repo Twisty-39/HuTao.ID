@@ -58,9 +58,13 @@ function createTable(rows, rowClass, labelClass, valueClass) {
   return table;
 }
 
+// render detail anime 
 function renderDetailAnime(anime) {
   const container = document.getElementById('detail');
-  container.innerHTML = '';
+  // container.innerHTML = '';
+  while (container.firstChild) {
+    container.removeChild(container.firstChild);
+  }
 
   const card = document.createElement('div');
   card.className = 'detail-card';
@@ -68,6 +72,10 @@ function renderDetailAnime(anime) {
   // Kiri
   const left = document.createElement('div');
   left.className = 'detail-left';
+
+  // const inner
+
+
   const img = document.createElement('img');
   img.src = anime.images?.jpg?.image_url || '';
   img.alt = anime.title;
@@ -168,6 +176,7 @@ function renderDetailAnime(anime) {
   container.appendChild(card);
 }
 
+// render detail manga 
 function renderDetailManga(manga) {
   const container = document.getElementById('detail');
   container.innerHTML = '';

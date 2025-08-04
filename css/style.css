@@ -190,14 +190,19 @@ hr {
 }
 
 /* bungkus konten universal */
-.content-section {
+.content-section,
+.content-section-2 {
     background: #E4DEBE;
     color: #A94438;
-    margin-bottom: 2rem;
     padding: 1.5rem 2rem;
     border-top: 3px solid #E6BAA3;
     box-shadow: 0px 0px 20px #A9443810;
     animation: fadeIn 1.0s ease-in-out;
+}
+
+/* set konten index */
+.content-section-2 {
+    margin-bottom: 2rem;
 }
 
 .content-section h1 {
@@ -206,6 +211,10 @@ hr {
 }
 
 /* setting teks  */
+.teks {
+    min-height: 100vh;
+}
+
 .teks p {
     text-align: justify;
     margin-bottom: 2%;
@@ -364,7 +373,8 @@ h3 {
         font-size: 1.2rem;
     }
 
-    .content-section h1 {
+    .content-section h1,
+    .content-section-2 h1 {
         font-size: 1.2rem;
     }
 
@@ -382,7 +392,7 @@ h3 {
     .teks h2 {
         font-size: 1.1rem;
     }
-    
+
     .list {
         margin-left: 6%;
         font-size: 1rem;
@@ -410,7 +420,8 @@ h3 {
 /* handphone */
 @media (max-width: 450px) {
 
-    .content-section {
+    .content-section,
+    .content-section-2 {
         padding: 1rem 1rem;
         margin-bottom: 1.5rem;
     }
@@ -455,7 +466,8 @@ h3 {
         font-size: 0.7rem;
     }
 
-    .content-section h1 {
+    .content-section h1,
+    .content-section-2 h1 {
         font-size: 0.9rem;
     }
 
@@ -486,6 +498,15 @@ h3 {
     .list {
         margin-left: 7%;
         font-size: 0.8rem;
+    }
+
+}
+
+@media (max-width: 330px) {
+
+    nav ul li a {
+        font-size: 0.7rem;
+        padding: 0.2rem;
     }
 
 }

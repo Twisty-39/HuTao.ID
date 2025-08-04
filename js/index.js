@@ -1,32 +1,37 @@
+// Jalankan ketika halaman sudah selesai dimuat
 document.addEventListener('DOMContentLoaded', async function () {
+  // Panggil semua fungsi fetch secara async dan berurutan
   await fetchSummerAnime();
   await fetchTopAnime();
   await fetchTopManga();
   await fetchTopTrailers();
 });
 
-// Fungsi retryFetch
+// Fungsi untuk melakukan fetch dengan retry otomatis
 async function retryFetch(url, options = {}, retries = 3, delay = 1000) {
   for (let i = 0; i < retries; i++) {
     try {
       const response = await fetch(url, options);
       if (!response.ok) throw new Error('Fetch failed');
-      return await response.json();
+      return await response.json(); // Berhasil, return hasil JSON
     } catch (err) {
-      if (i === retries - 1) throw err;
-      await new Promise(res => setTimeout(res, delay));
+      if (i === retries - 1) throw err; // Gagal total, lempar error
+      await new Promise(res => setTimeout(res, delay)); // Tunggu sebelum coba ulang
     }
   }
 }
 
-// Fetch Summer Anime
+// Fetch daftar anime musim panas tahun 2025
 async function fetchSummerAnime() {
   try {
     const json = await retryFetch('https://api.jikan.moe/v4/seasons/2025/summer?limit=15');
     const data = json.data || [];
     const container = document.getElementById('summer-anime-list');
     if (container) {
+      // Bersihkan kontainer sebelum menampilkan data baru
       while (container.firstChild) container.removeChild(container.firstChild);
+
+      // Render setiap anime sebagai kartu
       data.forEach(anime => {
         const card = createCard(anime.title, anime.images.webp?.image_url || '', '', anime.mal_id, 'anime');
         container.appendChild(card);
@@ -37,7 +42,7 @@ async function fetchSummerAnime() {
   }
 }
 
-// Fetch Top Anime
+// Fetch anime dengan rating/peringkat tertinggi
 async function fetchTopAnime() {
   try {
     const json = await retryFetch('https://api.jikan.moe/v4/top/anime?limit=15');
@@ -55,7 +60,7 @@ async function fetchTopAnime() {
   }
 }
 
-// Fetch Top Manga
+// Fetch manga dengan rating/peringkat tertinggi
 async function fetchTopManga() {
   try {
     const json = await retryFetch('https://api.jikan.moe/v4/top/manga?limit=15');
@@ -73,7 +78,7 @@ async function fetchTopManga() {
   }
 }
 
-// Fetch Top Trailers
+// Fetch daftar trailer anime terbaru/populer
 async function fetchTopTrailers() {
   try {
     const json = await retryFetch('https://api.jikan.moe/v4/watch/promos');
@@ -81,18 +86,20 @@ async function fetchTopTrailers() {
     const container = document.getElementById('top-trailers-list');
     if (container) {
       while (container.firstChild) container.removeChild(container.firstChild);
+
       data.forEach(trailer => {
         const embedUrl = trailer.trailer?.embed_url;
-        if (!embedUrl) return;
+        if (!embedUrl) return; // Skip jika tidak ada embed trailer
 
         const animeTitle = trailer.entry?.title || '';
         const img = trailer.entry?.images?.jpg?.image_url || '';
         const trailerTitle = trailer.title || '';
 
+        // Buat card dan tambahkan event klik untuk membuka modal
         const card = createCard(animeTitle, img, trailerTitle, '', 'trailer');
         card.addEventListener('click', (e) => {
           e.preventDefault();
-          playTrailer(embedUrl);
+          playTrailer(embedUrl); // Tampilkan trailer
         });
         container.appendChild(card);
       });
@@ -102,20 +109,25 @@ async function fetchTopTrailers() {
   }
 }
 
-// Fungsi untuk menampilkan trailer di modal
+// Fungsi untuk menampilkan trailer dalam modal iframe
 function playTrailer(embedUrl) {
   const section = document.getElementById('embed-trailers');
   if (section) {
     section.scrollIntoView({ bottom: 0, behavior: 'smooth' });
   }
+
   const modal = document.getElementById('trailer-modal');
   const iframe = document.getElementById('trailer-iframe');
   const closeBtn = document.querySelector('#trailer-modal .close');
+
   if (!modal || !iframe || !closeBtn) return;
-  iframe.src = embedUrl;
-  modal.style.display = 'block';
+
+  iframe.src = embedUrl; // Set video trailer
+  modal.style.display = 'block'; // Tampilkan modal
+
+  // Tombol untuk menutup modal
   closeBtn.onclick = () => {
-    iframe.src = '';
+    iframe.src = ''; // Hentikan video saat modal ditutup
     modal.style.display = 'none';
   };
 }

@@ -11,11 +11,6 @@
   width: 100%;
 }
 
-/* .inner-left {
-  display: flex;
-  flex-direction: column;
-} */
-
 .detail-left {
   flex: 0 0 200px; /* res break point 425 (jadikan width 100%)*/
   margin: 0%;

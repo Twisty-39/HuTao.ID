@@ -1,19 +1,14 @@
 document.addEventListener('DOMContentLoaded', function () {
-    // tampungan
     let currentPage = 1;
     const resultContainer = document.getElementById('rec-anime-result');
     const paginationContainer = document.getElementById('pagination');
 
-    // ambil data anime-rec 
     function recAnime() {
-        // bersihkan container 
         while (resultContainer.firstChild) {
             resultContainer.removeChild(resultContainer.firstChild);
         }
-        // tampung endpoint 
         const url = `https://api.jikan.moe/v4/recommendations/anime?page=${currentPage}`;
 
-        // loading style-2.css 
         const loading = document.createElement('div');
         loading.className = 'lds-ellipsis';
         for (let i = 0; i < 4; i++) {
@@ -22,16 +17,13 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         resultContainer.appendChild(loading);
-        // fetch data anime-rec 
         fetch(url)
             .then(res => res.json())
             .then(json => {
                 const data = json.data || [];
-                // bersihkan container 
                 while (resultContainer.firstChild) {
                     resultContainer.removeChild(resultContainer.firstChild);
                 }
-                // error handling 
                 if (data.length === 0) {
                     const notFound = document.createElement('p');
                     notFound.textContent = 'Tidak ditemukan.';
@@ -48,7 +40,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 let animeCount = 0;
                 let id = new Set();
 
-                // render card anime dari json 
                 for (const group of data) {
                     for (const anime of group.entry) {
                         if (animeCount >= 12) break;

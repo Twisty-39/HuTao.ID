@@ -7,7 +7,6 @@
   font-family: 'Poppins', sans-serif;
 }
 
-
 /* set form  */
 .search-section form {
   display: flex;
@@ -71,7 +70,7 @@
   animation: fadeIn 1.5s ease-in-out;
 }
 
-/* pagination universal */
+/* pagination universal (ex-trailer)*/
 .pagination {
   display: flex;
   flex-wrap: wrap;

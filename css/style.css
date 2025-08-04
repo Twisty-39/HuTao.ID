@@ -388,7 +388,7 @@ h3 {
         font-size: 1rem;
     }
 
-    @keyframes scroll-title-x-small {
+    @keyframes scroll-title-x {
         0% {
             transform: translateX(0);
         }

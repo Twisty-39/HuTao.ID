@@ -1,4 +1,4 @@
-/* konten search anime/manga */
+/* bungkus search form manga/anime */
 .search-section {
   padding: 1.5rem 2rem;
   border-radius: 12px;
@@ -7,12 +7,15 @@
   font-family: 'Poppins', sans-serif;
 }
 
+
+/* set form  */
 .search-section form {
   display: flex;
   gap: 1rem;
   margin-bottom: 1.2rem;
 }
 
+/* set inputan  */
 .search-section input[type="text"] {
   flex: 1;
   padding: 0.6em 1em;
@@ -21,6 +24,7 @@
   font-size: 1.08rem;
 }
 
+/* set button submit  */
 .search-section button {
   background: #a83232;
   color: #fff;
@@ -35,6 +39,7 @@
   background: #d94c4c;
 }
 
+/* set select genre dan type  */
 #genre-select,
 #type-select {
   padding: 0.4em 1em;
@@ -43,7 +48,7 @@
   font-size: 1.05rem;
 }
 
-/* breakpoint */
+/* breakpoint bungkus search form */
 @media (max-width: 780px) {
   .search-section form {
     flex-direction: column;
@@ -75,6 +80,7 @@
   margin: 2rem 0;
 }
 
+/* set button page  */
 .pagination button {
   background: #fff;
   color: #A94438;

@@ -1,4 +1,4 @@
-/* Trailer Modal*/
+/* Trailer Modal (ex-index)*/
 .trailer-modal {
   position: fixed;
   top: 0;
@@ -15,6 +15,7 @@
   backdrop-filter: blur(8px);
 }
 
+/* embed YT (ex-index)*/
 .trailer-modal iframe {
   width: 70%;
   height: 70%;
@@ -27,6 +28,7 @@
   animation: fadeIn 1.5s ease-in-out;
 }
 
+/* tombol X (ex-index)*/
 .trailer-modal .close {
   cursor: pointer;
   right: 5%;

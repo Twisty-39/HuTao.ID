@@ -1,3 +1,4 @@
+/* set tombol more>>  */
 .more {
     color: #a83232;
     font-size: 0.97rem;
@@ -10,11 +11,12 @@
     color: #d94c4c;
 }
 
-/* trailer */
+/* layer embed (index) */
 #embed-trailers {
     position: relative;
 }
 
+/* Trailer Modal (index) */
 .trailer-modal {
     position: fixed;
     top: 50%;
@@ -31,6 +33,7 @@
     animation: fadeIn 1.0s ease-in-out;
 }
 
+/* embed YT (index)*/
 .trailer-modal iframe {
     width: 100%;
     height: 400px;
@@ -39,6 +42,7 @@
     animation: fadeIn 1.5s ease-in-out;
 }
 
+/* tombol X (index)*/
 .trailer-modal .close {
     cursor: pointer;
     right: 15px;

@@ -73,14 +73,17 @@ function renderDetailAnime(anime) {
   const left = document.createElement('div');
   left.className = 'detail-left';
 
-  // const inner
+  // inner left 
+  const inner = document.createElement('div');
+  inner.className = 'inner-left';
+  left.appendChild(inner);
 
 
   const img = document.createElement('img');
   img.src = anime.images?.jpg?.image_url || '';
   img.alt = anime.title;
   img.className = 'detail-img';
-  left.appendChild(img);
+  inner.appendChild(img);
 
   // Trailer button
   if (anime.trailer?.embed_url) {
@@ -92,8 +95,13 @@ function renderDetailAnime(anime) {
       window.scrollTo({ top: 0, behavior: 'smooth' });
       showTrailerModal(anime.trailer.embed_url);
     };
-    left.appendChild(trailerBtn);
+    inner.appendChild(trailerBtn);
   }
+
+  // inner left 2 
+  const inner2 = document.createElement('div');
+  inner.className = 'inner-left';
+  left.appendChild(inner2);
 
   // Prod table
   const prodRows = [
@@ -101,7 +109,7 @@ function renderDetailAnime(anime) {
     { label: 'Producers', value: anime.producers?.map(p => p.name).join(', ') },
     { label: 'Licensors', value: anime.licensors?.map(l => l.name).join(', ') }
   ];
-  left.appendChild(createTable(prodRows, 'detail-prod-row', 'detail-prod-label', 'detail-prod-value'));
+  inner2.appendChild(createTable(prodRows, 'detail-prod-row', 'detail-prod-label', 'detail-prod-value'));
 
   // Streaming
   if (anime.streaming?.length) {
@@ -123,7 +131,7 @@ function renderDetailAnime(anime) {
     tr.appendChild(tdLabel);
     tr.appendChild(tdValue);
     streamTable.appendChild(tr);
-    left.appendChild(streamTable);
+    inner2.appendChild(streamTable);
   }
   card.appendChild(left);
 

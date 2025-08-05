@@ -54,6 +54,7 @@ header {
     align-items: center;
 }
 
+/* bg video dan overlay  */
 .h-video,
 .h-overlay {
     position: absolute;

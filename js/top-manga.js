@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Fungsi utama untuk mengambil dan menampilkan data manga dari API
     function topManga() {
-        // Bersihkan konten sebelumnya (misalnya hasil dari halaman sebelumnya)
+        // Bersihkan konten sebelumnya
         while (resultContainer.firstChild) {
             resultContainer.removeChild(resultContainer.firstChild);
         }
@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     const card = createCard(
                         manga.title, // Judul manga
                         manga.images.webp?.image_url || '', // URL gambar
-                        '', // Deskripsi kosong (bisa ditambahkan kalau perlu)
+                        '', // ekstra kosongkan
                         manga.mal_id, // ID manga (untuk detail/link)
                         'manga' // Jenis konten
                     );

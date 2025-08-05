@@ -1,4 +1,4 @@
-// Jalankan kode setelah seluruh DOM selesai dimuat
+// Tunggu sampai semua elemen di halaman selesai dimuat
 document.addEventListener('DOMContentLoaded', function () {
     let currentPage = 1; // Halaman saat ini
     let currentGenre = ''; // ID genre yang dipilih
@@ -39,9 +39,9 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         });
 
-    // ======================
+    // =============================
     // ISI DAFTAR TIPE MANGA
-    // ======================
+    // =============================
     const typeList = ['manga', 'novel', 'lightnovel', 'oneshot', 'manhwa', 'manhua'];
 
     // Kosongkan opsi sebelumnya
@@ -106,7 +106,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (currentGenre) url += `&genres=${currentGenre}`;
         if (currentType) url += `&type=${currentType}`;
 
-        // Tampilkan loading spinner
+        // Tampilkan animasi loading saat data sedang dimuat
         const loading = document.createElement('div');
         loading.className = 'lds-ellipsis';
         for (let i = 0; i < 4; i++) {
@@ -147,7 +147,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     const card = createCard(
                         manga.title,
                         manga.images.webp?.image_url || '',
-                        '', // deskripsi kosong
+                        '', // ekstra kosong
                         manga.mal_id,
                         'manga'
                     );

@@ -1,4 +1,4 @@
-// Jalankan kode setelah seluruh DOM dimuat
+// Tunggu sampai semua elemen di halaman selesai dimuat
 document.addEventListener('DOMContentLoaded', function () {
     let currentPage = 1; // Menyimpan nomor halaman aktif
     const resultContainer = document.getElementById('season-anime-result'); // Tempat menampilkan anime musim
@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // URL API untuk anime musim panas 2025, sesuai halaman aktif
         let url = `https://api.jikan.moe/v4/seasons/2025/summer?limit=12&page=${currentPage}`;
 
-        // Tampilkan indikator loading (4 titik)
+        // Tampilkan animasi loading saat data sedang dimuat
         const loading = document.createElement('div');
         loading.className = 'lds-ellipsis';
         for (let i = 0; i < 4; i++) {

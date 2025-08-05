@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // Endpoint API rekomendasi manga
         const url = `https://api.jikan.moe/v4/recommendations/manga?page=${currentPage}`;
 
-        // Buat dan tampilkan indikator loading
+        // tampilkan indikator loading
         const loading = document.createElement('div');
         loading.className = 'lds-ellipsis';
         for (let i = 0; i < 4; i++) {

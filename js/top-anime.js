@@ -1,12 +1,12 @@
-// Jalankan fungsi setelah seluruh konten DOM dimuat
+// Tunggu sampai semua elemen di halaman selesai dimuat
 document.addEventListener('DOMContentLoaded', function () {
-    let currentPage = 1; // Menyimpan nomor halaman yang sedang ditampilkan
+    let currentPage = 1; // Menyimpan halaman saat ini
     const resultContainer = document.getElementById('top-anime-result'); // Tempat hasil anime akan ditampilkan
     const paginationContainer = document.getElementById('pagination'); // Tempat tombol pagination
 
     // Fungsi utama untuk mengambil dan menampilkan data anime
     function topAnime() {
-        // Bersihkan isi sebelumnya dari resultContainer (jika ada)
+        // Bersihkan isi sebelumnya
         while (resultContainer.firstChild) {
             resultContainer.removeChild(resultContainer.firstChild);
         }
@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // URL untuk ambil top anime dari Jikan API
         let url = `https://api.jikan.moe/v4/top/anime?limit=12&page=${currentPage}`;
 
-        // Buat elemen loading animasi (ellipsis)
+        // Tampilkan animasi loading saat data sedang dimuat
         const loading = document.createElement('div');
         loading.className = 'lds-ellipsis';
         for (let i = 0; i < 4; i++) {
@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     notFound.textContent = 'Tidak ditemukan.';
                     resultContainer.appendChild(notFound);
 
-                    // Kosongkan pagination juga
+                    // Kosongkan pagination
                     while (paginationContainer.firstChild) {
                         paginationContainer.removeChild(paginationContainer.firstChild);
                     }
@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     const card = createCard(
                         anime.title,                              // Judul anime
                         anime.images.webp?.image_url || '',      // Gambar anime
-                        '',                                       // Deskripsi kosong
+                        '',                                       // ekstra kosongk
                         anime.mal_id,                             // ID anime
                         'anime'                                   // Tipe konten
                     );

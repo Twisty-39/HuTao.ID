@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function () {
         .then(json => {
             const genres = json.data || [];
 
-            // Bersihkan isi sebelumnya di <select>
+            // Bersihkan isi sebelumnya 
             while (genreSelect.firstChild) {
                 genreSelect.removeChild(genreSelect.firstChild);
             }

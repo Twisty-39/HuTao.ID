@@ -78,6 +78,7 @@
   margin: 0;
 }
 
+/* set tabel kiri kanan */
 .detail-info,
 .detail-tags,
 .detail-prod,
@@ -102,6 +103,7 @@
   margin-right: 0.5em;
 }
 
+/* deskripsi anime / manga  */
 .detail-desc {
   margin-top: 1em;
   line-height: 1.6;
